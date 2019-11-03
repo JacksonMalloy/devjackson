@@ -1,0 +1,9 @@
+{
+  "short_name": "Portfolio",
+  "name": "Jackson Malloy's Portfolio",
+
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
+}
