@@ -1,15 +1,16 @@
 const dialogFlow = require("dialogflow");
-const config = require("../config/keys");
 const structjson = require("./structjson");
 
+require('dotenv').config();
+
 //Bring in Project Keys
-const languageCode = config.dialogFlowSessionLanguageCode;
-const sessionID = config.dialogFlowSessionID;
-const projectID = config.googleProjectID;
+const languageCode = process.env.DIALOGFLOW_LANG_CODE;
+const sessionID = process.env.DIALOGFLOW_SESSION_ID;
+const projectID = process.env.GOOGLE_PROJECT_ID;
 
 const credentials = {
-  client_email: config.googleClientEmail,
-  private_key: config.googlePrivateKey
+  client_email: process.env.GOOGLE_CLIENT_EMAIL,
+  private_key: process.env.GOOGLE_PRIVATE_KEY
 };
 
 const sessionClient = new dialogFlow.SessionsClient({ projectID, credentials });
