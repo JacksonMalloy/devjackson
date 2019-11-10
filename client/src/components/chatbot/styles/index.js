@@ -47,6 +47,8 @@ export const ChatHeader = styled.header`
 
   @media (max-width: 700px) {
     padding: 0px;
+    -webkit-backdrop-filter: blur(80px);
+    backdrop-filter: blur(80px);
   }
 `;
 
@@ -79,7 +81,7 @@ export const ChatMain = styled.div`
     position: fixed;
     top: 50px;
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 110px);
   }
 `;
 
@@ -98,14 +100,14 @@ export const ChatFooter = styled.form`
   &:focus {
     border: none;
     outline: none;
-    -webkit-backdrop-filter: blur(80px);
-    backdrop-filter: blur(80px);
   }
 
   @media (max-width: 700px) {
     width: 100vw;
     font-size: 1rem;
     height: 60px;
+    -webkit-backdrop-filter: blur(80px);
+    backdrop-filter: blur(80px);
   }
 `;
 
