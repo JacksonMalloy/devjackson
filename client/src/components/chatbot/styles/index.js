@@ -17,9 +17,8 @@ export const ChatContainer = styled.section`
 
   @media (max-width: 700px) {
     height: 100vh;
-    max-height: 100vh;
     width: 100vw;
-    position: absolute;
+    position: fixed;
     top: auto;
     left: 0;
     bottom: 0;

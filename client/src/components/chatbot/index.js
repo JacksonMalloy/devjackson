@@ -11,8 +11,7 @@ import {
   ChatMain,
   ChatHeader,
   ChatInput,
-  ChatSubmit,
-  CloseChat
+  ChatSubmit
 } from './styles';
 
 //Creating cookie for unique session for DialogFlow

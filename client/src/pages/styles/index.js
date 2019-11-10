@@ -10,7 +10,7 @@ import {
 } from '../../globals';
 
 export const Page = styled(anim.section)`
-  height: 100vh;
+  height: 100vw;
   width: 100vw;
 
   .RHS {
@@ -26,6 +26,7 @@ export const Page = styled(anim.section)`
   @media (max-width: ${tabletMax}) {
     display: flex;
     flex-direction: column;
+    height: auto;
   }
 `;
 
@@ -135,7 +136,7 @@ export const Opposite = styled.div`
   @media (max-width: ${tabletMax}) {
     position: relative;
     bottom: 0px;
-    top: 0;
+    top: auto;
     left: 0%;
     transform: translate(0%);
   }
