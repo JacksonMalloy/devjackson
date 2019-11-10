@@ -4,7 +4,7 @@ const structjson = require("./structjson");
 require('dotenv').config();
 
 //Bring in Project Keys
-const languageCode = process.env.DIALOGFLOW_LANG_CODE;
+const languageCode = process.env.DIALOGFLOW_LANGUAGE_CODE;
 const sessionID = process.env.DIALOGFLOW_SESSION_ID;
 const projectID = process.env.GOOGLE_PROJECT_ID;
 
