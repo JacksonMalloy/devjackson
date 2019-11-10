@@ -71,14 +71,19 @@ export const ChatMain = styled.div`
   }
 
   &#style-4::-webkit-scrollbar-thumb {
-    background-color: #000000;
+    background-color: ${highlightcolor};
     border: 2px solid ${highlightcolor};
   }
 
   @media (max-width: 700px) {
+    position: fixed;
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 120px);
     margin-top: 20px;
+
+    &#style-4::-webkit-scrollbar-thumb {
+      border: 1px solid ${highlightcolor};
+    }
   }
 `;
 
