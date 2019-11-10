@@ -25,6 +25,7 @@ export const ChatContainer = styled.section`
     bottom: 0;
     border-radius: 0px;
     background-color: white;
+    padding: 20px 5px;
   }
 `;
 
@@ -46,9 +47,7 @@ export const ChatHeader = styled.header`
   }
 
   @media (max-width: 700px) {
-    span {
-      padding-left: 45px;
-    }
+    padding: 0px;
   }
 `;
 
@@ -79,6 +78,8 @@ export const ChatMain = styled.div`
 
   @media (max-width: 700px) {
     width: 100%;
+    height: calc(100% - 80px);
+    margin-top: 20px;
   }
 `;
 
@@ -102,8 +103,9 @@ export const ChatFooter = styled.form`
   }
 
   @media (max-width: 700px) {
-    width: 90vw;
+    width: 100vw;
     font-size: 1rem;
+    height: 60px;
   }
 `;
 
@@ -124,6 +126,7 @@ export const ChatInput = styled.input`
 
   @media (max-width: 700px) {
     padding-right: 15px;
+    margin-left: 5px;
   }
 `;
 
@@ -147,6 +150,10 @@ export const ChatSubmit = styled.button`
 
   &:focus {
     display: none;
+  }
+
+  @media (max-width: 700px) {
+    margin-right: 10px;
   }
 `;
 
@@ -175,6 +182,11 @@ export const ConvLeftBubble = styled.div`
   border-top-left-radius: 0;
   background-color: ${primary};
   color: #222;
+
+  @media (max-width: 700px) {
+    margin: 5px;
+    padding: 7px 15px;
+  }
 `;
 
 export const ConvRightBubble = styled.div`
@@ -192,4 +204,9 @@ export const ConvRightBubble = styled.div`
   text-align: start;
   border-top-right-radius: 0;
   background-color: ${highlightcolor};
+
+  @media (max-width: 700px) {
+    margin: 5px;
+    padding: 7px 15px;
+  }
 `;
