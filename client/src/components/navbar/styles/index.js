@@ -57,6 +57,18 @@ export const NavbarContainer = styled.div`
     }
   }
 
+  .activeNavIcon {
+    & span {
+      display: inline-block;
+      cursor: pointer;
+    }
+
+    & i {
+      display: none;
+      cursor: pointer;
+    }
+  }
+
   ul {
     position: absolute;
     bottom: 20px;
@@ -75,11 +87,6 @@ export const NavbarContainer = styled.div`
       height: 51px;
       position: relative;
       text-decoration: none;
-
-      &:hover {
-        color: ${highlightcolor};
-        cursor: pointer;
-      }
     }
   }
 
@@ -91,14 +98,15 @@ export const NavbarContainer = styled.div`
     z-index: 99;
     background-color: ${primary};
 
-    li {
+    a {
       display: inline-block;
       line-height: 80px;
       width: 100%;
       height: 100%;
       z-index: 97;
+      color: ${highlightcolor};
 
-      a {
+      li {
         height: 100%;
         display: inline-block;
         width: 100%;

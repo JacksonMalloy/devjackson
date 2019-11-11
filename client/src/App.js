@@ -12,7 +12,7 @@ import { Route, Switch } from 'react-router-dom';
 export default function App() {
   return (
     <>
-      <Navbar />
+      <Navbar pathname='waddup' />
       <Switch>
         <Route exact path='/' component={Home} />
         <Route exact path='/about' component={About} />

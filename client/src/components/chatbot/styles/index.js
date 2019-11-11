@@ -156,6 +156,7 @@ export const ChatSubmit = styled.button`
 
   @media (max-width: 700px) {
     margin-right: 10px;
+    display: none;
   }
 `;
 

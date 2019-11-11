@@ -214,7 +214,7 @@ class Chatbot extends Component {
               />
               <ChatSubmit
                 type='submit'
-                value='submit'
+                value='Submit'
                 disabled={this.state.value.length < 1}
               >
                 SEND

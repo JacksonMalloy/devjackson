@@ -27,6 +27,10 @@ export const Page = styled(anim.section)`
     display: flex;
     flex-direction: column;
     height: auto;
+
+    .RHS {
+      display: none;
+    }
   }
 `;
 

@@ -4,30 +4,50 @@ import { NavLink } from 'react-router-dom';
 export default function NavbarIcons() {
   return (
     <nav>
-      <li>
-        <NavLink to='/' style={{ textDecoration: 'none' }} exact>
+      <NavLink
+        to='/'
+        style={{ textDecoration: 'none', fontWeight: 'bold' }}
+        exact
+        activeClassName='activeNavIcon'
+      >
+        <li>
           <i className='fas fa-home' />
           <span>Home</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/about' style={{ textDecoration: 'none' }}>
+        </li>
+      </NavLink>
+
+      <NavLink
+        to='/about'
+        style={{ textDecoration: 'none', fontWeight: 'bold' }}
+        activeClassName='activeNavIcon'
+      >
+        <li>
           <i className='far fa-user' />
           <span>About</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/skills' style={{ textDecoration: 'none' }}>
+        </li>
+      </NavLink>
+
+      <NavLink
+        to='/skills'
+        style={{ textDecoration: 'none', fontWeight: 'bold' }}
+        activeClassName='activeNavIcon'
+      >
+        <li>
           <i className='fas fa-cog' />
           <span>Skills</span>
-        </NavLink>
-      </li>
-      <li>
-        <NavLink to='/work' style={{ textDecoration: 'none' }}>
+        </li>
+      </NavLink>
+
+      <NavLink
+        to='/work'
+        style={{ textDecoration: 'none', fontWeight: 'bold' }}
+        activeClassName='activeNavIcon'
+      >
+        <li>
           <i className='far fa-eye' />
           <span>Projects</span>
-        </NavLink>
-      </li>
+        </li>
+      </NavLink>
     </nav>
   );
 }
