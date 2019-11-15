@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
+const compression = require('compression');
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 
@@ -10,6 +12,7 @@ const dialogFlowRoutes = require('./routes/dialogFlow');
 const fulfillmentRoutes = require('./routes/fulfillment');
 
 app.use(bodyParser.json());
+app.use(compression());
 
 app.use(dialogFlowRoutes);
 app.use(fulfillmentRoutes);
@@ -23,6 +26,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, () => {
-  console.log(`server started at port ${PORT}`);
-});
+app.listen(PORT);
