@@ -1,6 +1,6 @@
 import React from 'react';
 import WorkGrid from '../components/projects/WorkGrid';
-import { useSpring, animated as anim } from 'react-spring';
+import { useSpring } from 'react-spring';
 
 import { Page, InfoPanel, Opposite, PageSplit } from './styles';
 import { Link } from 'react-router-dom';

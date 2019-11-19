@@ -1,11 +1,4 @@
 import styled from 'styled-components';
-import {
-  tabletMax,
-  mobileMax,
-  subprimary,
-  highlightcolor,
-  primary
-} from '../../../globals';
 
 export const NavbarContainer = styled.div`
   width: 80px;
@@ -26,7 +19,7 @@ export const NavbarContainer = styled.div`
 
   li {
     list-style: none;
-    color: ${subprimary};
+    color: ${props => props.theme.subprimary};
     font-size: 22px;
     line-height: 51px;
     height: 51px;
@@ -40,7 +33,7 @@ export const NavbarContainer = styled.div`
     }
 
     i {
-      color: ${subprimary};
+      color: ${props => props.theme.subprimary};
     }
 
     &:hover i {
@@ -50,7 +43,7 @@ export const NavbarContainer = styled.div`
 
     span {
       display: none;
-      color: ${highlightcolor};
+      color: ${props => props.theme.highlightcolor};
       text-decoration: none;
       text-transform: Uppercase;
       font-size: 12px;
@@ -80,7 +73,7 @@ export const NavbarContainer = styled.div`
     margin: 0;
 
     i {
-      color: ${subprimary};
+      color: ${props => props.theme.subprimary};
       font-size: 22px;
       padding: 0 13px;
       line-height: 51px;
@@ -90,13 +83,13 @@ export const NavbarContainer = styled.div`
     }
   }
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     width: 100vw;
     height: 80px;
     position: fixed;
     bottom: 0;
     z-index: 99;
-    background-color: ${primary};
+    background-color: ${props => props.theme.primary};
 
     a {
       display: inline-block;
@@ -104,7 +97,7 @@ export const NavbarContainer = styled.div`
       width: 100%;
       height: 100%;
       z-index: 97;
-      color: ${highlightcolor};
+      color: ${props => props.theme.highlightcolor};
 
       li {
         height: 100%;
@@ -171,7 +164,7 @@ export const NavbarLogo = styled.div`
   left: 14px;
   top: 20px;
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     left: 5px;
     display: none;
   }

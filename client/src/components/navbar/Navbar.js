@@ -1,19 +1,18 @@
 import React from 'react';
-import Cool_J from '../../Cool_J.svg';
-
 import NavbarIcons from './NavbarIcons';
-import { Link } from 'react-router-dom';
-
+import SVG from '../SVG/SVG';
+import { useTheme } from '../../themeContext';
+import { withTheme } from 'styled-components';
 import { NavbarContainer, NavbarLogo } from './styles';
 
-export default function Navbar() {
+function Navbar(props) {
+  const themeToggle = useTheme();
+
   return (
     <>
       <NavbarContainer>
-        <NavbarLogo>
-          <Link to='/' style={{ textDecoration: 'none' }}>
-            <img src={Cool_J} alt='Logo' />
-          </Link>
+        <NavbarLogo onClick={() => themeToggle.toggle()}>
+          <SVG />
         </NavbarLogo>
 
         <NavbarIcons />
@@ -38,3 +37,5 @@ export default function Navbar() {
     </>
   );
 }
+
+export default withTheme(Navbar);

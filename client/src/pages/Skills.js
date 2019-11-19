@@ -1,14 +1,10 @@
 import React from 'react';
-import SkillsContainer from '../components/skills/SkillsContainer';
-import SkillsFilter from '../components/skills/SkillsFilter';
-import { withSkillConsumer } from '../context';
 import { useSpring } from 'react-spring';
 
 import { Page, PageSplit, InfoPanel, Opposite } from './styles';
 import { Link } from 'react-router-dom';
 
-function Skills({ context }) {
-  const { skills } = context;
+function Skills() {
   const fade = useSpring({
     from: {
       opacity: 0
@@ -39,4 +35,4 @@ function Skills({ context }) {
   );
 }
 
-export default withSkillConsumer(Skills);
+export default Skills;

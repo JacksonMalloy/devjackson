@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { tabletMax, mobileMax, subprimary, primary } from '../../../globals';
 
 export const GridContainer = styled.div`
   display: grid;
@@ -11,13 +10,13 @@ export const GridContainer = styled.div`
   grid-auto-flow: dense;
   margin: 25px;
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     margin: 55px 10px;
     position: absolute;
     top: -58%;
   }
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     margin: 10px 10px;
     top: 0;
   }
@@ -26,7 +25,7 @@ export const GridContainer = styled.div`
 export const ProjectCard = styled.div`
   overflow: hidden;
   position: relative;
-  box-shadow: 1px 4px 6px ${subprimary};
+  box-shadow: 1px 4px 6px ${props => props.theme.subprimary};
   transition: linear 0.3s;
   display: grid;
   grid-template-columns: 1;
@@ -42,7 +41,7 @@ export const ProjectCard = styled.div`
     height: 100%;
     overflow: none;
     justify-content: center;
-    background: ${primary};
+    background: ${props => props.theme.primary};
     filter: grayscale(0%);
     vertical-align: middle;
   }
@@ -54,7 +53,7 @@ export const ProjectCard = styled.div`
 
   .text-align-work p {
     text-decoration: none;
-    color: ${subprimary};
+    color: ${props => props.theme.subprimary};
     text-align: center;
   }
 `;

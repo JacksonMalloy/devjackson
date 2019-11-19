@@ -1,5 +1,5 @@
 import React from 'react';
-import SVG from '../components/SVG';
+import SVG from '../components/SVG/SVG';
 import { useSpring } from 'react-spring';
 import { Link } from 'react-router-dom';
 

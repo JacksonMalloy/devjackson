@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { animated as anim } from 'react-spring';
-import { tabletMax, mobileMax } from '../../../globals';
 
 export const GalleryGrid = styled.div`
   display: grid;
@@ -8,7 +7,7 @@ export const GalleryGrid = styled.div`
   grid-auto-rows: 100px;
   grid-auto-flow: dense;
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     padding-top: 0;
     grid-template-columns: 100%;
     grid-auto-rows: 100px;
@@ -16,7 +15,7 @@ export const GalleryGrid = styled.div`
     display: none;
   }
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     display: none;
   }
 `;
@@ -61,7 +60,7 @@ export const GridItem = styled(anim.div)`
     grid-column: span 4;
   }
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     /*Rows*/
     &.v2 {
       grid-row: span 4;

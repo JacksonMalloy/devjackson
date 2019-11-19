@@ -1,17 +1,3 @@
-$colors: (
-  primary: #f4f4f4,
-  subprimary: #333333,
-  highlightcolor: #1b61a9,
-  backgroundcolor: #ffffff,
-  primaryflip: #090909,
-  backgroundcolorflip: #000000,
-  subprimaryflip: #cccccc
-);
-
-@function color($color-name) {
-  @return map-get($colors, $color-name);
-}
-
 @import './partials/fluidtypography';
 
 * {
@@ -22,11 +8,12 @@ $colors: (
 html {
   overflow: hidden;
   height: 100%;
+  font-size: 15px;
 }
 
 p {
-  font-size: 1em;
-  line-height: 1.5em;
+  font-size: 1rem;
+  line-height: 1.5rem;
 }
 
 .projects_margin {
@@ -177,16 +164,4 @@ p {
     top: 9px;
     width: 0%;
   }
-}
-
-.animatedLogoFront {
-  fill: #1b61a9;
-  stroke: #1b61a9;
-  stroke-width: 1;
-}
-
-.animatedLogoBack {
-  fill: #333333;
-  stroke: #333333;
-  stroke-width: 1;
 }

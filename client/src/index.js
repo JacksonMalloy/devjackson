@@ -1,15 +1,22 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import { HashRouter as Router } from 'react-router-dom';
-import { SkillProvider } from './context';
+import { MyThemeProvider } from './themeContext';
+import { createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`
+  h1 {
+    color: ${props => props.theme.subprimary};
+  }
+`;
 
 ReactDOM.render(
-  <SkillProvider>
+  <MyThemeProvider>
+    <GlobalStyle />
     <Router>
       <App />
     </Router>
-  </SkillProvider>,
+  </MyThemeProvider>,
   document.getElementById('root')
 );

@@ -1,13 +1,5 @@
 import styled from 'styled-components';
 import { animated as anim } from 'react-spring';
-import {
-  tabletMax,
-  mobileMax,
-  backgroundcolor,
-  highlightcolor,
-  subprimary,
-  primary
-} from '../../globals';
 
 export const Page = styled(anim.section)`
   height: 100vw;
@@ -21,9 +13,10 @@ export const Page = styled(anim.section)`
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: ${props => props.theme.backgroundcolor};
   }
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     display: flex;
     flex-direction: column;
     height: auto;
@@ -44,7 +37,7 @@ export const InfoPanel = styled(anim.div)`
   z-index: 2;
 
   button {
-    background-color: ${highlightcolor};
+    background-color: ${props => props.theme.highlightcolor};
     font-size: 15px;
     padding: 10px 15px;
     margin-bottom: 0;
@@ -53,28 +46,29 @@ export const InfoPanel = styled(anim.div)`
     line-height: 100%;
     letter-spacing: 2px;
     text-decoration: none;
-    color: ${primary};
+    color: ${props => props.theme.primary};
     position: relative;
     cursor: pointer;
     transition: ease 0.5s;
     text-transform: uppercase;
 
     &:hover {
-      border: 5px solid ${subprimary};
+      border: 5px solid ${props => props.theme.subprimary};
       background: white;
       transition: ease 0.5s;
-      color: ${subprimary};
+      color: ${props => props.theme.subprimary};
+      background-color: ${props => props.theme.primary};
     }
   }
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     width: 100%;
     top: 25%;
     text-align: left;
     transform: translateY(0%);
 
     button {
-      background-color: ${highlightcolor};
+      background-color: ${props => props.theme.highlightcolor};
       font-size: 11px;
       padding: 7px 12px;
       font-weight: 800;
@@ -83,7 +77,7 @@ export const InfoPanel = styled(anim.div)`
     }
   }
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     width: 100%;
     top: 25%;
     text-align: left;
@@ -97,11 +91,15 @@ export const PageSplit = styled.div`
   top: 50%;
   transform: translateY(-50%);
   width: 50vw;
-  background-image: linear-gradient(to right, ${backgroundcolor}, ${primary});
+  background-image: linear-gradient(
+    to right,
+    ${props => props.theme.backgroundcolor},
+    ${props => props.theme.primary}
+  );
   z-index: 1;
-  box-shadow: 0px 0px 10px ${subprimary};
+  box-shadow: 0px 0px 10px ${props => props.theme.subprimary};
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     display: none;
   }
 `;
@@ -116,7 +114,7 @@ export const Logo = styled.div`
   left: auto;
   margin: auto;
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     display: none;
   }
 `;
@@ -137,7 +135,7 @@ export const Opposite = styled.div`
     justify-content: center;
   }
 
-  @media (max-width: ${tabletMax}) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     position: relative;
     bottom: 0px;
     top: auto;
@@ -145,7 +143,7 @@ export const Opposite = styled.div`
     transform: translate(0%);
   }
 
-  @media (max-width: ${mobileMax}) {
+  @media (max-width: ${props => props.theme.mobileMax}) {
     overflow-x: visible;
     position: relative;
     height: 100%;
@@ -163,7 +161,7 @@ export const Blob = styled.div`
     position: absolute;
     will-change: transform;
     border-radius: 50%;
-    background: ${highlightcolor};
+    background: ${props => props.theme.highlightcolor};
     box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
     opacity: 0.6;
   }

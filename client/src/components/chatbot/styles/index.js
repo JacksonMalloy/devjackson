@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 
-import { highlightcolor, primary, subprimary } from '../../../globals';
-
 export const ChatContainer = styled.section`
   right: 0;
   bottom: 0;
@@ -9,7 +7,7 @@ export const ChatContainer = styled.section`
   height: 100%;
   width: 50vw;
   position: fixed;
-  box-shadow: 0 0 450px 100px ${primary};
+  box-shadow: 0 0 450px 100px ${props => props.theme.primary};
   border-radius: 3px;
   padding: 20px;
   font-size: 22px;
@@ -23,7 +21,7 @@ export const ChatContainer = styled.section`
     left: 0;
     bottom: 0;
     border-radius: 0px;
-    background-color: white;
+    background-color: ${props => props.theme.backgroundcolor};
     padding: 20px 5px;
   }
 `;
@@ -38,7 +36,7 @@ export const ChatHeader = styled.header`
   background-position: left;
   font-size: 3rem;
   font-weight: bold;
-  color: ${subprimary};
+  color: ${props => props.theme.subprimary};
 
   span {
     padding-left: 55px;
@@ -64,17 +62,17 @@ export const ChatMain = styled.div`
   overflow-x: hidden;
 
   &#style-4::-webkit-scrollbar-track {
-    background-color: ${primary};
+    background-color: ${props => props.theme.primary};
   }
 
   &#style-4::-webkit-scrollbar {
     width: 5px;
-    background-color: ${primary};
+    background-color: ${props => props.theme.primary};
   }
 
   &#style-4::-webkit-scrollbar-thumb {
-    background-color: #000000;
-    border: 2px solid ${highlightcolor};
+    background-color: ${props => props.theme.subprimary};
+    border: 2px solid ${props => props.theme.highlightcolor};
   }
 
   @media (max-width: 700px) {
@@ -116,7 +114,7 @@ export const ChatInput = styled.input`
   border: none;
   height: 100%;
   width: 100%;
-  color: ${subprimary};
+  color: ${props => props.theme.subprimary};
   background-color: inherit;
 
   &:focus {
@@ -136,16 +134,16 @@ export const ChatSubmit = styled.button`
   height: 40px;
   width: 110px;
   cursor: pointer;
-  background-color: ${highlightcolor};
+  background-color: ${props => props.theme.highlightcolor};
   border: none;
   border-radius: 10px;
-  color: ${primary};
+  color: ${props => props.theme.primary};
   box-shadow: 0px 0px 5px 1px inherit;
 
   &:disabled {
-    box-shadow: 0px 0px 10px 5px ${primary} inset;
-    background-color: ${primary};
-    color: ${subprimary};
+    box-shadow: 0px 0px 10px 5px ${props => props.theme.primary} inset;
+    background-color: ${props => props.theme.primary};
+    color: ${props => props.theme.subprimary};
     opacity: 0.5;
     cursor: auto;
   }
@@ -180,11 +178,10 @@ export const ConvLeftBubble = styled.div`
   display: inline-block;
   font-size: 15px;
   word-spacing: 0.3px;
-  color: white;
+  color: ${props => props.theme.subprimary};
   text-align: start;
   border-top-left-radius: 0;
-  background-color: ${primary};
-  color: #222;
+  background-color: ${props => props.theme.primary};
 
   @media (max-width: 700px) {
     margin: 5px;
@@ -203,10 +200,10 @@ export const ConvRightBubble = styled.div`
   display: inline-block;
   font-size: 15px;
   word-spacing: 0.3px;
-  color: white;
+  color: ${props => props.theme.primary};
   text-align: start;
   border-top-right-radius: 0;
-  background-color: ${highlightcolor};
+  background-color: ${props => props.theme.highlightcolor};
 
   @media (max-width: 700px) {
     margin: 5px;
