@@ -3,6 +3,8 @@ import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { v4 as uuid } from 'uuid';
 
+import composeRefs from '../../composeRefs';
+
 import Message from './Message';
 
 import {
@@ -41,6 +43,8 @@ class Chatbot extends Component {
     this.toggleBot = this.toggleBot.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+
+    this.inputRef = React.createRef();
   }
 
   // Helper function to delay on component mount
@@ -205,12 +209,15 @@ class Chatbot extends Component {
               <ChatInput
                 type='text'
                 //Scrolls window to input
-                ref={input => {
+                ref={composeRefs(this.inputRef, input => {
                   this.chatInput = input;
-                }}
+                })}
                 placeholder='Type a message...'
                 value={this.state.value}
                 onChange={this.handleChange}
+                onMouseEnter={() => {
+                  this.inputRef.current.focus();
+                }}
               />
               <ChatSubmit
                 type='submit'

@@ -25,8 +25,8 @@ export default function Work() {
             <br /> for your Business?
           </h1>
           <h2>I'm looking for side projects</h2>
-          <Link to='/'>
-            <button>Contact Me</button>
+          <Link to='/skills/'>
+            <button>Skills</button>
           </Link>
         </InfoPanel>
 

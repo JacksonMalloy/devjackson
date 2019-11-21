@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { useSpring } from 'react-spring';
 import { Page, InfoPanel, PageSplit, Opposite } from './styles';
 import { Link } from 'react-router-dom';
+import Spinner from '../components/Loading';
 
 const Gallery = lazy(() => import('../components/gallery/Gallery'));
 
@@ -26,14 +27,14 @@ export default function About() {
 
         <h2>Front-End / Back-End / Full-Stack</h2>
 
-        <Link to='/work'>
-          <button>LinkedIn</button>
+        <Link to='/'>
+          <button>Contact Me</button>
         </Link>
       </InfoPanel>
 
       <PageSplit />
       <Opposite>
-        <Suspense fallback={<h1>Loading...</h1>}>
+        <Suspense fallback={<Spinner />}>
           <Gallery />
         </Suspense>
       </Opposite>

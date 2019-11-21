@@ -163,6 +163,7 @@ export const NavbarLogo = styled.div`
   position: fixed;
   left: 14px;
   top: 20px;
+  cursor: pointer;
 
   @media (max-width: ${props => props.theme.mobileMax}) {
     left: 5px;

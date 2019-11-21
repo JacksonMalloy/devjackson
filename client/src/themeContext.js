@@ -40,15 +40,13 @@ export const MyThemeProvider = ({ children }) => {
     mode: lightTheme
   });
 
-  let themeArray = [lightTheme, darkTheme, blackWhiteTheme];
+  const toggle = () => {
+    const themeArray = [lightTheme, darkTheme, blackWhiteTheme];
 
-  const toggle = themeArray => {
-    const rotate = themeArray => {
-      themeArray.unshift(themeArray.pop());
-      return themeArray[0];
-    };
+    console.log(themeArray);
 
     const mode = themeState.mode === lightTheme ? darkTheme : lightTheme;
+
     setThemeState({ mode: mode });
   };
 

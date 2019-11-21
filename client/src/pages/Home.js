@@ -2,11 +2,15 @@ import React from 'react';
 import SVG from '../components/SVG/SVG';
 import { useSpring } from 'react-spring';
 import { Link } from 'react-router-dom';
+import { useTheme } from '../themeContext';
+import { withTheme } from 'styled-components';
 
 import { Page, InfoPanel, PageSplit, Logo } from './styles';
 import Chatbot from '../components/chatbot';
 
-const Home = () => {
+const Home = props => {
+  const themeToggle = useTheme();
+
   const fade = useSpring({
     from: {
       opacity: 0
@@ -27,13 +31,13 @@ const Home = () => {
           </h1>
           <h2>JavaScript / React.js / Node.js</h2>
 
-          <Link to='/work'>
+          <Link to='/work/'>
             <button>projects</button>
           </Link>
         </InfoPanel>
 
         <div className='RHS'>
-          <Logo>
+          <Logo onClick={() => themeToggle.toggle()}>
             <SVG />
           </Logo>
         </div>
@@ -45,4 +49,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default withTheme(Home);

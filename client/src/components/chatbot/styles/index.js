@@ -7,14 +7,15 @@ export const ChatContainer = styled.section`
   height: 100%;
   width: 50vw;
   position: fixed;
-  box-shadow: 0 0 450px 100px ${props => props.theme.primary};
   border-radius: 3px;
   padding: 20px;
   font-size: 22px;
   overflow: none;
+  display: flex;
+  flex-direction: column;
 
   @media (max-width: 700px) {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     position: fixed;
     top: auto;
@@ -22,7 +23,7 @@ export const ChatContainer = styled.section`
     bottom: 0;
     border-radius: 0px;
     background-color: ${props => props.theme.backgroundcolor};
-    padding: 20px 5px;
+    padding: 10px;
   }
 `;
 
@@ -44,9 +45,9 @@ export const ChatHeader = styled.header`
   }
 
   @media (max-width: 700px) {
-    padding: 0px;
-    -webkit-backdrop-filter: blur(80px);
-    backdrop-filter: blur(80px);
+    height: 100%;
+    width: 100%;
+    display: none;
   }
 `;
 
@@ -56,7 +57,7 @@ export const CloseChat = styled.span`
 
 export const ChatMain = styled.div`
   position: relative;
-  height: calc(100% - 160px);
+  height: 100%;
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
@@ -76,19 +77,17 @@ export const ChatMain = styled.div`
   }
 
   @media (max-width: 700px) {
-    position: fixed;
-    top: 50px;
     width: 100%;
-    height: calc(100% - 110px);
+    height: 100%;
   }
 `;
 
 export const ChatFooter = styled.form`
   display: flex;
-  position: absolute;
+  position: relative;
   bottom: 0;
-  height: 80px;
-  width: 48vw;
+
+  width: 100%;
   align-items: center;
   justify-content: space-between;
   font-size: 1rem;
@@ -101,7 +100,8 @@ export const ChatFooter = styled.form`
   }
 
   @media (max-width: 700px) {
-    width: 100vw;
+    position: relative;
+    width: 100%;
     font-size: 1rem;
     height: 60px;
     -webkit-backdrop-filter: blur(80px);
@@ -153,8 +153,9 @@ export const ChatSubmit = styled.button`
   }
 
   @media (max-width: 700px) {
-    margin-right: 10px;
-    display: none;
+    &:focus {
+      display: block;
+    }
   }
 `;
 

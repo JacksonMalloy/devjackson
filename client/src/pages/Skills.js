@@ -24,8 +24,8 @@ function Skills() {
         </h1>
         <h2>My Structural Foundation</h2>
 
-        <Link to='/work'>
-          <button>GitHub</button>
+        <Link to='/about/'>
+          <button>About</button>
         </Link>
       </InfoPanel>
 

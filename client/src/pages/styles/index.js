@@ -109,7 +109,7 @@ export const Logo = styled.div`
   height: 600px;
   position: absolute;
   top: 0;
-
+  cursor: pointer;
   bottom: 0;
   left: auto;
   margin: auto;
