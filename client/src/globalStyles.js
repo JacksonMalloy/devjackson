@@ -39,6 +39,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
+    backdrop-filter: blur(20px);
 }
 
 .navIconContainer {

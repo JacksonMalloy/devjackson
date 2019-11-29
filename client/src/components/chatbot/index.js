@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 import { v4 as uuid } from 'uuid';
-
 import composeRefs from '../../composeRefs';
 
+//Render Message Components
+import Buttons from './Buttons';
+import Gif from './Gif';
+import Links from './Links';
 import Message from './Message';
 
 import {
@@ -137,14 +140,92 @@ class Chatbot extends Component {
     }
   }
 
-  renderMessage(message, i) {
+  //Helper functions
+  isNormalMessage(message) {
+    return message.message && message.message.text && message.message.text.text;
+  }
+
+  isButtonCard(message) {
     return (
-      <Message
-        key={i}
-        speaks={message.speaks}
-        text={message.message.text.text}
-      />
+      message.message &&
+      message.message.payload &&
+      message.message.payload.fields &&
+      message.message.payload.fields.buttons
     );
+  }
+
+  isGifCard(message) {
+    return (
+      message.message &&
+      message.message.payload &&
+      message.message.payload.fields &&
+      message.message.payload.fields.gifs
+    );
+  }
+
+  isLinkCard(message) {
+    return (
+      message.message &&
+      message.message.payload &&
+      message.message.payload.fields &&
+      message.message.payload.fields.links
+    );
+  }
+
+  //Render Functions
+
+  renderButtons(fields) {
+    return fields.map((button, i) => (
+      <Buttons
+        key={i}
+        payload={button.structValue}
+        onClick={this.handleButtonSend}
+      />
+    ));
+  }
+
+  renderGif(fields) {
+    return fields.map((gif, i) => <Gif key={i} payload={gif.structValue} />);
+  }
+
+  renderLink(fields) {
+    return fields.map((link, i) => (
+      <Links key={i} payload={link.structValue} />
+    ));
+  }
+
+  renderMessage(message, i) {
+    if (this.isNormalMessage(message)) {
+      return (
+        <Message
+          key={i}
+          speaks={message.speaks}
+          text={message.message.text.text}
+        />
+      );
+    } else if (this.isButtonCard(message)) {
+      return (
+        <div>
+          {this.renderButtons(
+            message.message.payload.fields.buttons.listValue.values
+          )}
+        </div>
+      );
+    } else if (this.isGifCard(message)) {
+      return (
+        <div>
+          {this.renderGif(message.message.payload.fields.gifs.listValue.values)}
+        </div>
+      );
+    } else if (this.isLinkCard(message)) {
+      return (
+        <div>
+          {this.renderLink(
+            message.message.payload.fields.links.listValue.values
+          )}
+        </div>
+      );
+    }
   }
 
   // Renders all the messages
@@ -175,6 +256,14 @@ class Chatbot extends Component {
 
   handleToggle() {
     this.setState({ toggle: !this.state.toggle });
+  }
+
+  async handleButtonSend(event) {
+    const eventText = event.target.innerText;
+
+    await this.setState({ value: `${eventText}` });
+    await this.df_text_query(this.state.value.split());
+    await this.setState({ value: '' });
   }
 
   render() {

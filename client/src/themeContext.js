@@ -15,7 +15,7 @@ const lightTheme = {
   mobileMax: '555px'
 };
 
-const darkTheme = {
+const HSLTheme = {
   highlightcolor: '#66abf2',
   primary: '#090909',
   subprimary: '#f5f5f5',
@@ -25,8 +25,18 @@ const darkTheme = {
   mobileMax: '555px'
 };
 
+const orangeTheme = {
+  highlightcolor: '#FF7F00',
+  primary: '#620000',
+  subprimary: '#FFFF9B',
+  backgroundcolor: '#272727',
+  desktopMax: '1700px',
+  tabletMax: '950px',
+  mobileMax: '555px'
+}
+
 const blackWhiteTheme = {
-  highlightcolor: '#090909',
+  highlightcolor: '#cccccc',
   primary: '#090909',
   subprimary: '#f9f9f9',
   backgroundcolor: '#000000',
@@ -40,15 +50,30 @@ export const MyThemeProvider = ({ children }) => {
     mode: lightTheme
   });
 
+  const mode = themeState.mode;
+
   const toggle = () => {
-    const themeArray = [lightTheme, darkTheme, blackWhiteTheme];
+    if (mode === lightTheme) {
+      const mode = themeState.mode === lightTheme ? HSLTheme : lightTheme;
+      setThemeState({ mode: mode });
+    }
 
-    console.log(themeArray);
+    if (mode === HSLTheme) {
+      let mode = themeState.mode === HSLTheme ? orangeTheme : HSLTheme;
+      setThemeState({ mode: mode });
+    }
 
-    const mode = themeState.mode === lightTheme ? darkTheme : lightTheme;
+    if (mode === orangeTheme) {
+      let mode = themeState.mode === orangeTheme ? blackWhiteTheme : orangeTheme;
+      setThemeState({ mode: mode });
+    }
 
-    setThemeState({ mode: mode });
+    if (mode === blackWhiteTheme) {
+      let mode = themeState.mode === blackWhiteTheme ? lightTheme : blackWhiteTheme;
+      setThemeState({ mode: mode });
+    }
   };
+
 
   return (
     <ThemeToggleContext.Provider value={{ toggle: toggle }}>

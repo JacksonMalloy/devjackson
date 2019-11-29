@@ -34,7 +34,7 @@ export default function About() {
 
       <PageSplit />
       <Opposite>
-        <Suspense fallback={<Spinner />}>
+        <Suspense fallback={<Spinner style={{ top: '50%' }} />}>
           <Gallery />
         </Suspense>
       </Opposite>

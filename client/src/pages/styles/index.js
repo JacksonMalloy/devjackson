@@ -66,6 +66,7 @@ export const InfoPanel = styled(anim.div)`
     top: 25%;
     text-align: left;
     transform: translateY(0%);
+    left: 8%!important;
 
     button {
       background-color: ${props => props.theme.highlightcolor};
@@ -82,6 +83,7 @@ export const InfoPanel = styled(anim.div)`
     top: 25%;
     text-align: left;
     transform: translateY(0%);
+    left: 15%;
   }
 `;
 
@@ -128,6 +130,9 @@ export const Opposite = styled.div`
   width: 50vw;
   z-index: 0;
   overflow-x: hidden;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
 
   h1 {
     display: flex;

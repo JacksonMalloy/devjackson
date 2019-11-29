@@ -61,6 +61,7 @@ export const ChatMain = styled.div`
   width: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  margin-bottom: 10px;
 
   &#style-4::-webkit-scrollbar-track {
     background-color: ${props => props.theme.primary};
@@ -79,6 +80,7 @@ export const ChatMain = styled.div`
   @media (max-width: 700px) {
     width: 100%;
     height: 100%;
+    margin-bottom: 0px;
   }
 `;
 
