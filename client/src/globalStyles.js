@@ -1,13 +1,20 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  h1 {
-    color: ${props => props.theme.subprimary};
-  }
+  
 
-  * {
+@font-face {
+  font-family: 'AmstelvarAlpha';
+  src: url('../fonts/AmstelvarAlpha-VF.ttf');
+}
+
+* {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+}
+
+h1 {
+  color: ${props => props.theme.subprimary};
 }
 
 h2 {
