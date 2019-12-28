@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
   
@@ -46,7 +46,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    backdrop-filter: blur(20px);
+
 }
 
 .navIconContainer {

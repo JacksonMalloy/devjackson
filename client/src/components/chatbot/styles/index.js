@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const ChatContainer = styled.section`
   right: 0;
@@ -81,6 +81,7 @@ export const ChatMain = styled.div`
     width: 100%;
     height: 100%;
     margin-bottom: 0px;
+    padding-top: 30px;
   }
 `;
 
@@ -106,8 +107,6 @@ export const ChatFooter = styled.form`
     width: 100%;
     font-size: 1rem;
     height: 60px;
-    -webkit-backdrop-filter: blur(80px);
-    backdrop-filter: blur(80px);
   }
 `;
 
@@ -122,8 +121,6 @@ export const ChatInput = styled.input`
   &:focus {
     border: none;
     outline: none;
-    -webkit-backdrop-filter: blur(80px);
-    backdrop-filter: blur(80px);
   }
 
   @media (max-width: 700px) {
@@ -163,11 +160,12 @@ export const ChatSubmit = styled.button`
 
 export const ConvLeftContainer = styled.div`
   text-align: left;
+  padding-right: 30px;
 `;
 
 export const ConvRightContainer = styled.div`
   text-align: right;
-  padding-right: 15px;
+  padding-right: 30px;
 `;
 
 export const ConvLeftBubble = styled.div`

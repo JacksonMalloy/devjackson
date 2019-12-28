@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const NavbarContainer = styled.div`
   width: 80px;
@@ -168,5 +168,28 @@ export const NavbarLogo = styled.div`
   @media (max-width: ${props => props.theme.mobileMax}) {
     left: 5px;
     display: none;
+
+    &.mobileNavLogo {
+      height: 100%;
+      width: 100%;
+      position: relative;
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      line-height: 80px;
+      z-index: 97;
+      top: 0px;
+
+      svg {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  @media (min-width: ${props => props.theme.mobileMax}) {
+    &.mobileNavLogo {
+      display: none;
+    }
   }
 `;

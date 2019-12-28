@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { animated as anim } from 'react-spring';
+import styled from "styled-components";
+import { animated as anim } from "react-spring";
 
 export const Page = styled(anim.section)`
   height: 100vw;
@@ -22,6 +22,22 @@ export const Page = styled(anim.section)`
     height: auto;
 
     .RHS {
+      display: block;
+      width: 100vw;
+      pointer-events: none;
+    }
+
+    &.removeClickEventMobile {
+      pointer-events: none;
+
+      svg {
+        pointer-events: none;
+      }
+    }
+  }
+
+  @media (min-width: ${props => props.theme.tabletMax}) {
+    &.hideOnDesktop {
       display: none;
     }
   }
@@ -66,7 +82,7 @@ export const InfoPanel = styled(anim.div)`
     top: 25%;
     text-align: left;
     transform: translateY(0%);
-    left: 8%!important;
+    left: 8% !important;
 
     button {
       background-color: ${props => props.theme.highlightcolor};
@@ -117,7 +133,10 @@ export const Logo = styled.div`
   margin: auto;
 
   @media (max-width: ${props => props.theme.tabletMax}) {
-    display: none;
+    display: block;
+    height: 100%;
+    width: 100%;
+    opacity: 0.2;
   }
 `;
 
@@ -130,9 +149,6 @@ export const Opposite = styled.div`
   width: 50vw;
   z-index: 0;
   overflow-x: hidden;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
 
   h1 {
     display: flex;
@@ -187,7 +203,7 @@ export const Blob = styled.div`
   }
 
   & > div::after {
-    content: '';
+    content: "";
     position: absolute;
     top: 20px;
     left: 20px;

@@ -1,12 +1,12 @@
-import React from 'react';
-import SVG from '../components/SVG/SVG';
-import { useSpring } from 'react-spring';
-import { Link } from 'react-router-dom';
-import { useTheme } from '../themeContext';
-import { withTheme } from 'styled-components';
+import React from "react";
+import SVG from "../components/SVG/SVG";
+import { useSpring } from "react-spring";
+import { Link } from "react-router-dom";
+import { useTheme } from "../themeContext";
+import { withTheme } from "styled-components";
 
-import { Page, InfoPanel, PageSplit, Logo } from './styles';
-import Chatbot from '../components/chatbot';
+import { Page, InfoPanel, PageSplit, Logo } from "./styles";
+import Chatbot from "../components/chatbot";
 
 const Home = props => {
   const themeToggle = useTheme();
@@ -31,13 +31,16 @@ const Home = props => {
           </h1>
           <h2>JavaScript / React.js / Node.js</h2>
 
-          <Link to='/work/'>
+          <Link to="/work/">
             <button>projects</button>
           </Link>
         </InfoPanel>
 
-        <div className='RHS'>
-          <Logo onClick={() => themeToggle.toggle()}>
+        <div className="RHS">
+          <Logo
+            onClick={() => themeToggle.toggle()}
+            className="removeClickEventMobile"
+          >
             <SVG />
           </Logo>
         </div>

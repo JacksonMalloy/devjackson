@@ -1,11 +1,11 @@
-import React from 'react';
-import NavbarIcons from './NavbarIcons';
-import SVG from '../SVG/SVG';
-import { useTheme } from '../../themeContext';
-import { withTheme } from 'styled-components';
-import { NavbarContainer, NavbarLogo } from './styles';
+import React from "react";
+import NavbarIcons from "./NavbarIcons";
+import SVG from "../SVG/SVG";
+import { useTheme } from "../../themeContext";
+import { withTheme } from "styled-components";
+import { NavbarContainer, NavbarLogo } from "./styles";
 
-function Navbar(props) {
+function Navbar() {
   const themeToggle = useTheme();
 
   return (
@@ -19,18 +19,18 @@ function Navbar(props) {
 
         <ul>
           <a
-            href='https://www.linkedin.com/in/jacksonmalloy/'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://www.linkedin.com/in/jacksonmalloy/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <i className='fab fa-linkedin-in' />
+            <i className="fab fa-linkedin-in" />
           </a>
           <a
-            href='https://github.com/JacksonMalloy'
-            target='_blank'
-            rel='noopener noreferrer'
+            href="https://github.com/JacksonMalloy"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <i className='fab fa-github' />
+            <i className="fab fa-github" />
           </a>
         </ul>
       </NavbarContainer>

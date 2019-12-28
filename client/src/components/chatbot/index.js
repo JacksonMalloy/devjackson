@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import Cookies from 'universal-cookie';
-import { v4 as uuid } from 'uuid';
-import composeRefs from '../../composeRefs';
+import React, { Component } from "react";
+import axios from "axios";
+import Cookies from "universal-cookie";
+import { v4 as uuid } from "uuid";
+import composeRefs from "../../composeRefs";
 
 //Render Message Components
-import Buttons from './Buttons';
-import Gif from './Gif';
-import Links from './Links';
-import Message from './Message';
+import Buttons from "./Buttons";
+import Gif from "./Gif";
+import Links from "./Links";
+import Message from "./Message";
 
 import {
   ChatContainer,
@@ -17,7 +17,7 @@ import {
   ChatHeader,
   ChatInput,
   ChatSubmit
-} from './styles';
+} from "./styles";
 
 //Creating cookie for unique session for DialogFlow
 const cookies = new Cookies();
@@ -31,15 +31,15 @@ class Chatbot extends Component {
     super(props);
     this.state = {
       messages: [],
-      value: '',
+      value: "",
       showBot: false,
       welcomeSent: false,
-      botName: ''
+      botName: ""
     };
 
     // Setting the cookie using uuid
-    if (!cookies.get('userID')) {
-      cookies.set('userID', uuid(), { path: '/' });
+    if (!cookies.get("userID")) {
+      cookies.set("userID", uuid(), { path: "/" });
     }
 
     // Binding event listeners
@@ -63,15 +63,15 @@ class Chatbot extends Component {
   async componentDidMount() {
     if (!this.state.welcomeSent) {
       await this.resolveAfterXSeconds(1.5);
-      this.df_event_query('Welcome');
-      this.setState({ welcomeSent: true, showBot: true });
+      this.df_event_query("Welcome");
+      this.setState({ welcomeSent: true });
     }
   }
 
   // Scrolls to latest message when the state is updated
   componentDidUpdate() {
     if (this.state.showBot) {
-      this.messagesEnd.scrollIntoView({ behaviour: 'smooth' });
+      this.messagesEnd.scrollIntoView({ behaviour: "smooth" });
     }
     if (this.chatInput) {
       this.chatInput.focus();
@@ -83,7 +83,7 @@ class Chatbot extends Component {
   *****************************/
   async df_text_query(text) {
     let says = {
-      speaks: 'me',
+      speaks: "me",
       message: {
         text: {
           text
@@ -95,14 +95,14 @@ class Chatbot extends Component {
       messages: [...this.state.messages, says]
     });
 
-    const res = await axios.post('/api/df_text_query', {
+    const res = await axios.post("/api/df_text_query", {
       text,
-      userID: cookies.get('userID')
+      userID: cookies.get("userID")
     });
 
     // Handles fullfillment routes for dialogflow
     if (
-      res.data.action === 'input.whoAreYou' &&
+      res.data.action === "input.whoAreYou" &&
       res.data.allRequiredParamsPresent
     ) {
       this.setState({ botName: res.data.parameters.fields.name.stringValue });
@@ -110,7 +110,7 @@ class Chatbot extends Component {
 
     res.data.fulfillmentMessages.forEach(message => {
       says = {
-        speaks: 'bot',
+        speaks: "bot",
         message
       };
 
@@ -124,15 +124,15 @@ class Chatbot extends Component {
   Sends EVENT query to server
   *****************************/
   async df_event_query(event) {
-    const res = await axios.post('/api/df_event_query', {
+    const res = await axios.post("/api/df_event_query", {
       event,
-      userID: cookies.get('userID')
+      userID: cookies.get("userID")
     });
 
     // Iterate over responses in the request
     for (let msg of res.data.fulfillmentMessages) {
       let says = {
-        speaks: 'bot',
+        speaks: "bot",
         message: msg
       };
 
@@ -248,10 +248,10 @@ class Chatbot extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (this.state.value !== '') {
+    if (this.state.value !== "") {
       this.df_text_query(this.state.value.split());
     }
-    this.setState({ value: '' });
+    this.setState({ value: "" });
   }
 
   handleToggle() {
@@ -263,7 +263,7 @@ class Chatbot extends Component {
 
     await this.setState({ value: `${eventText}` });
     await this.df_text_query(this.state.value.split());
-    await this.setState({ value: '' });
+    await this.setState({ value: "" });
   }
 
   render() {
@@ -272,9 +272,9 @@ class Chatbot extends Component {
     if (showBot) {
       return (
         <>
-          <div className='toggleNavButton' onClick={this.toggleBot}>
-            <div className='navIconContainer'>
-              <div className='navIconOpen'>
+          <div className="toggleNavButton" onClick={this.toggleBot}>
+            <div className="navIconContainer">
+              <div className="navIconOpen">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -286,7 +286,7 @@ class Chatbot extends Component {
             <ChatHeader>
               <span>{botName}</span>
             </ChatHeader>
-            <ChatMain className='scrollbar' id='style-4'>
+            <ChatMain className="scrollbar" id="style-4">
               {this.renderMessages(this.state.messages)}
               <div
                 ref={el => {
@@ -296,12 +296,12 @@ class Chatbot extends Component {
             </ChatMain>
             <ChatFooter onSubmit={this.handleSubmit}>
               <ChatInput
-                type='text'
+                type="text"
                 //Scrolls window to input
                 ref={composeRefs(this.inputRef, input => {
                   this.chatInput = input;
                 })}
-                placeholder='Type a message...'
+                placeholder="Type a message..."
                 value={this.state.value}
                 onChange={this.handleChange}
                 onMouseEnter={() => {
@@ -309,8 +309,8 @@ class Chatbot extends Component {
                 }}
               />
               <ChatSubmit
-                type='submit'
-                value='Submit'
+                type="submit"
+                value="Submit"
                 disabled={this.state.value.length < 1}
               >
                 SEND
@@ -322,9 +322,9 @@ class Chatbot extends Component {
     } else {
       return (
         <>
-          <div className='toggleNavButton' onClick={this.toggleBot}>
-            <div className='navIconContainer'>
-              <div className='navIcon'>
+          <div className="toggleNavButton" onClick={this.toggleBot}>
+            <div className="navIconContainer">
+              <div className="navIcon">
                 <span></span>
                 <span></span>
                 <span></span>
