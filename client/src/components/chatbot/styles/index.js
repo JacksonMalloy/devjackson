@@ -171,7 +171,7 @@ export const ConvRightContainer = styled.div`
 export const ConvLeftBubble = styled.div`
   max-width: 350px;
   height: 100%;
-  border-radius: 30px;
+  border-radius: ${props => (props.primary ? "20px" : "10px")};
   margin: 10px 0px;
   width: inherit;
   overflow-wrap: break-word;
@@ -181,11 +181,15 @@ export const ConvLeftBubble = styled.div`
   word-spacing: 0.3px;
   color: ${props => props.theme.subprimary};
   text-align: start;
-  border-top-left-radius: 0;
+  border-bottom-left-radius: ${props => (props.primary ? "20px" : "4px")};
   background-color: ${props => props.theme.primary};
 
+  border: ${props => (props.primary ? "1px solid #333333" : "none")};
+  border-color: ${props => (props.primary ? props.theme.subprimary : "none")};
+  cursor: ${props => (props.primary ? "pointer" : "auto")};
+
   @media (max-width: 700px) {
-    margin: 5px;
+    margin: 2px;
     padding: 7px 15px;
   }
 `;
@@ -193,7 +197,7 @@ export const ConvLeftBubble = styled.div`
 export const ConvRightBubble = styled.div`
   max-width: 350px;
   height: 100%;
-  border-radius: 30px;
+  border-radius: 10px;
   margin: 10px 0px;
   width: inherit;
   overflow-wrap: break-word;
@@ -203,7 +207,7 @@ export const ConvRightBubble = styled.div`
   word-spacing: 0.3px;
   color: ${props => props.theme.primary};
   text-align: start;
-  border-top-right-radius: 0;
+  border-bottom-right-radius: 4px;
   background-color: ${props => props.theme.highlightcolor};
 
   @media (max-width: 700px) {

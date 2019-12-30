@@ -46,6 +46,7 @@ class Chatbot extends Component {
     this.toggleBot = this.toggleBot.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleButtonSend = this.handleButtonSend.bind(this);
 
     this.inputRef = React.createRef();
   }
@@ -55,7 +56,7 @@ class Chatbot extends Component {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(time);
-      }, time * 1000);
+      }, time * 500);
     });
   }
 
@@ -265,6 +266,13 @@ class Chatbot extends Component {
     await this.df_text_query(this.state.value.split());
     await this.setState({ value: "" });
   }
+
+  // Check for if iOS for mobile switch fix
+  //  renderCheckiOS() {
+  //   if (
+  //     navigator.appVersion.indexOf("Mac") !== -1 &&
+  //     window.innerWidth < 1000
+  //   )
 
   render() {
     const { showBot, botName } = this.state;
