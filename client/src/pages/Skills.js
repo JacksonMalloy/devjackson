@@ -20,14 +20,17 @@ function Skills() {
     <Page style={fade}>
       <InfoPanel className="skillsText about_margin" style={fade}>
         <h1>
-          Creativity,
-          <br /> Collaboration, <br />
-          Communication
+          Using <br />
+          Modern Tools <br />
+          and Best Practices.
         </h1>
-        <h2>My Structural Foundation</h2>
+        <h2>
+          This app is built with <br />
+          React, Node + Dialogflow
+        </h2>
 
-        <Link to="/about/">
-          <button>About</button>
+        <Link to="/work/">
+          <button>projects</button>
         </Link>
       </InfoPanel>
       <div className="RHS hideOnDesktop">

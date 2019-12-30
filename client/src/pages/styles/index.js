@@ -24,7 +24,7 @@ export const Page = styled(anim.section)`
     .RHS {
       display: block;
       width: 100%;
-      margin-top: 70px;
+      margin-top: 40px;
       pointer-events: none;
       overflow: hidden;
     }
@@ -145,7 +145,7 @@ export const Logo = styled.div`
     display: block;
     height: 100%;
     width: 100%;
-    opacity: 0.2;
+    opacity: 0.1;
   }
 `;
 

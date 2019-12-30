@@ -29,10 +29,12 @@ const Home = props => {
             <br /> I'm Jackson, <br />
             Web Developer.
           </h1>
-          <h2>JavaScript / React.js / Node.js</h2>
+          <h2>
+            For all sorts of stakeholders, <br />I build software that matters.
+          </h2>
 
-          <Link to="/work/">
-            <button>projects</button>
+          <Link to="/about/">
+            <button>about</button>
           </Link>
         </InfoPanel>
 

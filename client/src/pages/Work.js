@@ -22,13 +22,13 @@ export default function Work() {
       <Page style={fade}>
         <InfoPanel className="about_margin" style={fade}>
           <h1>
-            Seeking <br />
-            Innovation
-            <br /> for your Business?
+            Your <br />
+            Personal <br />
+            Developer.
           </h1>
-          <h2>I'm looking for side projects</h2>
-          <Link to="/skills/">
-            <button>Skills</button>
+          <h2>You've come to the right place.</h2>
+          <Link to="/">
+            <button>contact</button>
           </Link>
         </InfoPanel>
         <div className="RHS hideOnDesktop">

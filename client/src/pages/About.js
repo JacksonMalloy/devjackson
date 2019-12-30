@@ -21,15 +21,18 @@ export default function About() {
     <Page className="page-mobile" style={fade}>
       <InfoPanel className="about_margin" style={fade}>
         <h1>
-          I Develop <br />
-          Applications
-          <br /> that Innovate
+          I Build <br />
+          Modern User <br />
+          Experiences.
         </h1>
 
-        <h2>Front-End / Back-End / Full-Stack</h2>
+        <h2>
+          Performance matters.
+          <br /> Accessibility matters. <br /> Simplicity matters.
+        </h2>
 
-        <Link to="/">
-          <button>Contact Me</button>
+        <Link to="/skills/">
+          <button>skills</button>
         </Link>
       </InfoPanel>
 
