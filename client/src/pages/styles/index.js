@@ -23,16 +23,25 @@ export const Page = styled(anim.section)`
 
     .RHS {
       display: block;
-      width: 100vw;
+      width: 100%;
+      margin-top: 70px;
       pointer-events: none;
+      overflow: hidden;
     }
 
     &.removeClickEventMobile {
       pointer-events: none;
+      overflow: hidden;
 
       svg {
         pointer-events: none;
+        overflow: hidden;
       }
+    }
+
+    svg {
+      padding-left: 70px;
+      overflow: hidden;
     }
   }
 

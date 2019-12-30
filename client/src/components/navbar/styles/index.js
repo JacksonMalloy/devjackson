@@ -180,6 +180,14 @@ export const NavbarLogo = styled.div`
       z-index: 97;
       top: 0px;
 
+      div {
+        height: 80%;
+        width: 80%;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+      }
+
       svg {
         width: 100%;
         height: 100%;

@@ -57,7 +57,9 @@ export default function NavbarIcons() {
         onClick={() => themeToggle.toggle()}
         className="mobileNavLogo"
       >
-        <NavSVG />
+        <div>
+          <NavSVG />
+        </div>
       </NavbarLogo>
     </nav>
   );
