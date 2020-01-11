@@ -8,11 +8,13 @@ import Work from "./pages/Work";
 import Skills from "./pages/Skills";
 import Error from "./pages/Error";
 import { Route, Switch } from "react-router-dom";
+import Chatbot from "./components/chatbot";
 
 export default function App() {
   return (
     <>
       <Navbar />
+      <Chatbot />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />

@@ -24,7 +24,7 @@ export const Page = styled(anim.section)`
     .RHS {
       display: block;
       width: 100%;
-      margin-top: 40px;
+      margin-top: 20px;
       pointer-events: none;
       overflow: hidden;
     }
@@ -91,7 +91,7 @@ export const InfoPanel = styled(anim.div)`
     top: 25%;
     text-align: left;
     transform: translateY(0%);
-    left: 8% !important;
+    left: 5.5% !important;
 
     button {
       background-color: ${props => props.theme.highlightcolor};

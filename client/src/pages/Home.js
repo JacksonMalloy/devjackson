@@ -48,7 +48,7 @@ const Home = props => {
         </div>
 
         <PageSplit />
-        <Chatbot />
+        {/* <Chatbot /> */}
       </Page>
     </>
   );
