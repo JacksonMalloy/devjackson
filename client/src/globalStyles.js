@@ -32,6 +32,14 @@ p {
   font-size: 1rem;
   line-height: 1.5rem;
 }
+
+@media (orientation: landscape) {
+  .masterContainer {
+    display: none;
+  }
+}
+
+
   
 .toggleNavButton {
     margin: 0;

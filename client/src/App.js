@@ -12,7 +12,7 @@ import Chatbot from "./components/chatbot";
 
 export default function App() {
   return (
-    <>
+    <div className="masterContainer">
       <Navbar />
       <Chatbot />
       <Switch>
@@ -22,6 +22,6 @@ export default function App() {
         <Route exact path="/work" component={Work} />
         <Route component={Error} />
       </Switch>
-    </>
+    </div>
   );
 }
