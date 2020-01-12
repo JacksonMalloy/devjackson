@@ -14,7 +14,7 @@ export const ChatContainer = styled.section`
   display: flex;
   flex-direction: column;
 
-  @media (max-width: 700px) {
+  @media (max-width: ${props => props.theme.tabletMax}) {
     height: 100%;
     width: 100vw;
     position: fixed;

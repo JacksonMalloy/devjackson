@@ -71,6 +71,7 @@ export const NavbarContainer = styled.div`
     list-style: none;
     text-align: center;
     margin: 0;
+    transition: 1s linear;
 
     i {
       color: ${props => props.theme.subprimary};
@@ -80,6 +81,7 @@ export const NavbarContainer = styled.div`
       height: 51px;
       position: relative;
       text-decoration: none;
+      transition: 1s linear;
     }
   }
 
