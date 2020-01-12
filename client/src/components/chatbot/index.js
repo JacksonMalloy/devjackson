@@ -4,6 +4,8 @@ import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
 import composeRefs from "../../composeRefs";
 
+import { GlobalConsumer } from "../../context";
+
 //Render Message Components
 import Buttons from "./Buttons";
 import Gif from "./Gif";

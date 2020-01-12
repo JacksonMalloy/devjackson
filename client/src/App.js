@@ -9,6 +9,7 @@ import Skills from "./pages/Skills";
 import Error from "./pages/Error";
 import { Route, Switch } from "react-router-dom";
 import Chatbot from "./components/chatbot";
+import { GlobalProvider } from "./context";
 
 export default function App() {
   return (

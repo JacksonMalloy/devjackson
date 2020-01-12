@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ChatContainer = styled.section`
   right: 0;
   bottom: 0;
-  z-index: 99;
+  z-index: 100;
   height: 100%;
   width: 50vw;
   position: fixed;

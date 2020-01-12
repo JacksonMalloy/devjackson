@@ -45,7 +45,7 @@ p {
     margin: 0;
     outline: none;
     justify-self: end;
-    z-index: 100;
+    z-index: 101;
     position: absolute;
     top: 0px;
     right: 2vw;
