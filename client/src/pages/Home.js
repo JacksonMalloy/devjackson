@@ -6,7 +6,8 @@ import { useTheme } from "../themeContext";
 import { withTheme } from "styled-components";
 
 import { Page, InfoPanel, PageSplit, Logo } from "./styles";
-import Chatbot from "../components/chatbot";
+import styled from "styled-components";
+import { animated as anim } from "react-spring";
 
 const Home = props => {
   const themeToggle = useTheme();
@@ -20,13 +21,40 @@ const Home = props => {
     }
   });
 
+  const getRandomValues = () => {
+    return Math.random();
+  };
+
+  const letterAnimation = useSpring({
+    config: { duration: 1 },
+    x: 0,
+    from: { x: 1000 }
+  });
+
+  const StyledLetter = styled(anim.span)``;
+
+  const strOne = "Hi,";
+  const strTwo = "I'm Jackson,";
+
+  const firstStringClass = strOne
+    .split("")
+    .map(letter => (
+      <StyledLetter style={letterAnimation}>{letter}</StyledLetter>
+    ));
+
+  const secondStringClass = strTwo
+    .split("")
+    .map(letter => (
+      <StyledLetter style={letterAnimation}>{letter}</StyledLetter>
+    ));
+
   return (
     <>
       <Page style={fade}>
         <InfoPanel style={fade}>
           <h1>
-            Hi,
-            <br /> I'm Jackson, <br />
+            {firstStringClass}
+            <br /> {secondStringClass} <br />
             Web Developer.
           </h1>
           <h2>
@@ -48,7 +76,6 @@ const Home = props => {
         </div>
 
         <PageSplit />
-        {/* <Chatbot /> */}
       </Page>
     </>
   );

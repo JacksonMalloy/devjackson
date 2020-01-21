@@ -3,9 +3,15 @@ import React, { Component } from "react";
 const GlobalContext = React.createContext();
 
 class GlobalProvider extends Component {
-  state = {
-    showBot: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      showBot: false
+    };
+
+    // Binding event listeners
+    this.toggleBot = this.toggleBot.bind(this);
+  }
 
   toggleBot() {
     this.setState({ showBot: !this.state.showBot });
@@ -13,7 +19,9 @@ class GlobalProvider extends Component {
 
   render() {
     return (
-      <GlobalContext.Provider value={{ ...this.state, showBot: this.showBot }}>
+      <GlobalContext.Provider
+        value={{ ...this.state, toggleBot: this.toggleBot }}
+      >
         {this.props.children}
       </GlobalContext.Provider>
     );

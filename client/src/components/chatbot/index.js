@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
 import composeRefs from "../../composeRefs";
+import { GlobalConsumer } from "../../context";
 
 //Render Message Components
 import Buttons from "./Buttons";
@@ -22,46 +23,64 @@ import {
 //Creating cookie for unique session for DialogFlow
 const cookies = new Cookies();
 
-const Chatbot = () => {
-  const [messages, setMessages] = useState([]);
-  const [value, setValue] = useState("");
-  const [showBot, setShowBot] = useState(false);
-  const [welcomeSent, setWelcomeSent] = useState(false);
-
+class Chatbot extends Component {
   // Creating react references to elements
-  let messagesEnd;
-  let chatInput;
+  messagesEnd;
+  chatInput;
 
-  // Setting the cookie using uuid
-  if (!cookies.get("userID")) {
-    cookies.set("userID", uuid(), { path: "/" });
+  constructor(props) {
+    super(props);
+    this.state = {
+      messages: [],
+      value: "",
+      welcomeSent: false
+    };
+
+    // Setting the cookie using uuid
+    if (!cookies.get("userID")) {
+      cookies.set("userID", uuid(), { path: "/" });
+    }
+
+    // Binding event listeners
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleButtonSend = this.handleButtonSend.bind(this);
+
+    this.inputRef = React.createRef();
   }
 
-  let inputRef = React.createRef();
-
   // Helper function to delay on component mount
-  const resolveAfterXSeconds = time => {
+  resolveAfterXSeconds(time) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve(time);
       }, time * 500);
     });
-  };
+  }
 
-  useEffect(() => {
-    if (showBot) {
-      messagesEnd.scrollIntoView({ behaviour: "smooth" });
+  // Delays the welcome message and showBot
+  async componentDidMount() {
+    if (!this.state.welcomeSent) {
+      await this.resolveAfterXSeconds(1.5);
+      this.df_event_query("Welcome");
+      this.setState({ welcomeSent: true });
     }
-    if (chatInput) {
-      chatInput.focus();
+  }
+
+  // Scrolls to latest message when the state is updated
+  componentDidUpdate() {
+    if (this.state.showBot) {
+      this.messagesEnd.scrollIntoView({ behaviour: "smooth" });
     }
-  });
+    if (this.chatInput) {
+      this.chatInput.focus();
+    }
+  }
 
   /****************************
   Sends TEXT query to server
   *****************************/
-
-  async function df_text_query(text) {
+  async df_text_query(text) {
     let says = {
       speaks: "me",
       message: {
@@ -71,12 +90,16 @@ const Chatbot = () => {
       }
     };
 
-    setMessages([...messages, says]);
+    this.setState({
+      messages: [...this.state.messages, says]
+    });
 
     const res = await axios.post("/api/df_text_query", {
       text,
       userID: cookies.get("userID")
     });
+
+    // Handles fullfillment routes for dialogflow
 
     res.data.fulfillmentMessages.forEach(message => {
       says = {
@@ -84,17 +107,16 @@ const Chatbot = () => {
         message
       };
 
-      setMessages([...messages, says]);
+      this.setState({
+        messages: [...this.state.messages, says]
+      });
     });
   }
-
-  console.log(messages);
 
   /****************************
   Sends EVENT query to server
   *****************************/
-
-  async function df_event_query(event) {
+  async df_event_query(event) {
     const res = await axios.post("/api/df_event_query", {
       event,
       userID: cookies.get("userID")
@@ -107,71 +129,66 @@ const Chatbot = () => {
         message: msg
       };
 
-      setMessages([...messages, says]);
+      this.setState({ messages: [...this.state.messages, says] });
     }
   }
 
-  if (!welcomeSent) {
-    resolveAfterXSeconds(1.5);
-    df_event_query("Welcome");
-    setWelcomeSent(true);
+  //Helper functions
+  isNormalMessage(message) {
+    return message.message && message.message.text && message.message.text.text;
   }
 
-  //Helper functions
-  const isNormalMessage = message => {
-    return message.message && message.message.text && message.message.text.text;
-  };
-
-  const isButtonCard = message => {
+  isButtonCard(message) {
     return (
       message.message &&
       message.message.payload &&
       message.message.payload.fields &&
       message.message.payload.fields.buttons
     );
-  };
+  }
 
-  const isGifCard = message => {
+  isGifCard(message) {
     return (
       message.message &&
       message.message.payload &&
       message.message.payload.fields &&
       message.message.payload.fields.gifs
     );
-  };
+  }
 
-  const isLinkCard = message => {
+  isLinkCard(message) {
     return (
       message.message &&
       message.message.payload &&
       message.message.payload.fields &&
       message.message.payload.fields.links
     );
-  };
+  }
 
   //Render Functions
-  const renderButtons = fields => {
+
+  renderButtons(fields) {
     return fields.map((button, i) => (
       <Buttons
         key={i}
         payload={button.structValue}
-        onClick={handleButtonSend}
+        onClick={this.handleButtonSend}
       />
     ));
-  };
+  }
 
-  const renderGif = fields => {
+  renderGif(fields) {
     return fields.map((gif, i) => <Gif key={i} payload={gif.structValue} />);
-  };
+  }
 
-  const renderLink = fields => {
+  renderLink(fields) {
     return fields.map((link, i) => (
       <Links key={i} payload={link.structValue} />
     ));
-  };
+  }
 
-  const renderMessage = (message, i) => {
-    if (isNormalMessage(message)) {
+  renderMessage(message, i) {
+    if (this.isNormalMessage(message)) {
       return (
         <Message
           key={i}
@@ -179,64 +196,60 @@ const Chatbot = () => {
           text={message.message.text.text}
         />
       );
-    } else if (isButtonCard(message)) {
+    } else if (this.isButtonCard(message)) {
       return (
         <div>
-          {renderButtons(
+          {this.renderButtons(
             message.message.payload.fields.buttons.listValue.values
           )}
         </div>
       );
-    } else if (isGifCard(message)) {
+    } else if (this.isGifCard(message)) {
       return (
         <div>
-          {renderGif(message.message.payload.fields.gifs.listValue.values)}
+          {this.renderGif(message.message.payload.fields.gifs.listValue.values)}
         </div>
       );
-    } else if (isLinkCard(message)) {
+    } else if (this.isLinkCard(message)) {
       return (
         <div>
-          {renderLink(message.message.payload.fields.links.listValue.values)}
+          {this.renderLink(
+            message.message.payload.fields.links.listValue.values
+          )}
         </div>
       );
     }
-  };
-
-  const toggleBot = () => {
-    setShowBot(!showBot);
-  };
-
-  const handleChange = e => {
-    setValue(e.target.value);
-  };
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    if (value !== "") {
-      const message = value.split();
-      df_text_query(message);
-    }
-    setValue("");
-  };
-
-  const handleButtonSend = async event => {
-    const eventText = event.target.innerText;
-
-    await setValue(eventText);
-    const message = value.split();
-    await df_text_query(message);
-    await setValue("");
-  };
+  }
 
   // Renders all the messages
-  const renderMessages = stateMessages => {
+  renderMessages(stateMessages) {
     if (stateMessages) {
       return stateMessages.map((message, i) => {
-        return renderMessage(message, i);
+        return this.renderMessage(message, i);
       });
     }
     return null;
-  };
+  }
+
+  handleChange(e) {
+    this.setState({ value: e.target.value });
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    if (this.state.value !== "") {
+      this.df_text_query(this.state.value.split());
+    }
+    this.setState({ value: "" });
+  }
+
+  async handleButtonSend(event) {
+    const eventText = event.target.innerText;
+
+    await this.setState({ value: `${eventText}` });
+    await this.df_text_query(this.state.value.split());
+    await this.setState({ value: "" });
+  }
 
   // Check for if iOS for mobile switch fix
   //  renderCheckiOS() {
@@ -245,72 +258,80 @@ const Chatbot = () => {
   //     window.innerWidth < 1000
   //   )
 
-  if (showBot) {
+  render() {
     return (
-      <>
-        <div className="toggleNavButton" onClick={toggleBot}>
-          <div className="navIconContainer">
-            <div className="navIconOpen">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-        <ChatContainer>
-          <ChatHeader>
-            <span></span>
-          </ChatHeader>
-          <ChatMain className="scrollbar" id="style-4">
-            {renderMessages(messages)}
-            <div
-              ref={el => {
-                messagesEnd = el;
-              }}
-            />
-          </ChatMain>
-          <ChatFooter onSubmit={handleSubmit}>
-            <ChatInput
-              type="text"
-              //Scrolls window to input
-              ref={composeRefs(inputRef, input => {
-                chatInput = input;
-              })}
-              placeholder="Type a message..."
-              value={value}
-              onChange={handleChange}
-              onMouseEnter={() => {
-                inputRef.current.focus();
-              }}
-            />
-            <ChatSubmit
-              type="submit"
-              value="Submit"
-              disabled={value.length < 1}
-            >
-              SEND
-            </ChatSubmit>
-          </ChatFooter>
-        </ChatContainer>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <div className="toggleNavButton" onClick={toggleBot}>
-          <div className="navIconContainer">
-            <div className="navIcon">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </>
+      <GlobalConsumer>
+        {value => {
+          const { showBot, toggleBot } = value;
+
+          if (!showBot) {
+            return (
+              <div className="toggleNavButton" onClick={() => toggleBot()}>
+                <div className="navIconContainer">
+                  <div className="navIcon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+              </div>
+            );
+          } else {
+            return (
+              <>
+                <div className="toggleNavButton" onClick={() => toggleBot()}>
+                  <div className="navIconContainer">
+                    <div className="navIconOpen">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                </div>
+                <ChatContainer>
+                  <ChatHeader>
+                    <span></span>
+                  </ChatHeader>
+                  <ChatMain className="scrollbar" id="style-4">
+                    {this.renderMessages(this.state.messages)}
+                    <div
+                      ref={el => {
+                        this.messagesEnd = el;
+                      }}
+                    />
+                  </ChatMain>
+                  <ChatFooter onSubmit={this.handleSubmit}>
+                    <ChatInput
+                      type="text"
+                      //Scrolls window to input
+                      ref={composeRefs(this.inputRef, input => {
+                        this.chatInput = input;
+                      })}
+                      placeholder="Type a message..."
+                      value={this.state.value}
+                      onChange={this.handleChange}
+                      onMouseEnter={() => {
+                        this.inputRef.current.focus();
+                      }}
+                    />
+                    <ChatSubmit
+                      type="submit"
+                      value="Submit"
+                      disabled={this.state.value.length < 1}
+                    >
+                      SEND
+                    </ChatSubmit>
+                  </ChatFooter>
+                </ChatContainer>
+              </>
+            );
+          }
+        }}
+      </GlobalConsumer>
     );
   }
-};
+}
 
 export default Chatbot;
