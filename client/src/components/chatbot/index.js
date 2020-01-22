@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
 import composeRefs from "../../composeRefs";
-import { GlobalConsumer } from "../../context";
+import { GlobalConsumer, GlobalContext } from "../../context";
 
 //Render Message Components
 import Buttons from "./Buttons";
@@ -24,6 +24,8 @@ import {
 const cookies = new Cookies();
 
 class Chatbot extends Component {
+  static contextType = GlobalContext;
+
   // Creating react references to elements
   messagesEnd;
   chatInput;
@@ -66,6 +68,10 @@ class Chatbot extends Component {
       this.setState({ welcomeSent: true });
     }
   }
+
+  scrollToBottom = () => {
+    this.messagesEnd.scrollIntoView({ behavior: "smooth" });
+  };
 
   // Scrolls to latest message when the state is updated
   componentDidUpdate() {
@@ -296,6 +302,7 @@ class Chatbot extends Component {
                   </ChatHeader>
                   <ChatMain className="scrollbar" id="style-4">
                     {this.renderMessages(this.state.messages)}
+
                     <div
                       ref={el => {
                         this.messagesEnd = el;

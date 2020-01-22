@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 
-const GlobalContext = React.createContext();
+export const GlobalContext = React.createContext();
 
 class GlobalProvider extends Component {
-  constructor(props) {
-    super(props);
+  constructor(context) {
+    super(context);
+    this.currentContext = context;
+    this.value = { ...context };
     this.state = {
       showBot: false
     };
@@ -15,6 +17,14 @@ class GlobalProvider extends Component {
 
   toggleBot() {
     this.setState({ showBot: !this.state.showBot });
+  }
+
+  update() {
+    this.value = { ...this.currentContext };
+  }
+
+  isOutdated() {
+    return JSON.stringify(this.value) !== JSON.stringify(this.currentContext);
   }
 
   render() {
