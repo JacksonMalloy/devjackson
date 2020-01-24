@@ -42,11 +42,11 @@ const Home = props => {
       <StyledLetter style={letterAnimation}>{letter}</StyledLetter>
     ));
 
-  const secondStringClass = strTwo
-    .split("")
-    .map(letter => (
-      <StyledLetter style={letterAnimation}>{letter}</StyledLetter>
-    ));
+  const secondStringClass = strTwo.split("").map((letter, i) => (
+    <StyledLetter key={i} style={letterAnimation}>
+      {letter}
+    </StyledLetter>
+  ));
 
   return (
     <>
