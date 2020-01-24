@@ -1,10 +1,13 @@
 import React from "react";
-import { useSpring } from "react-spring";
+import { useSpring, animated as anim } from "react-spring";
 
 import { Page, PageSplit, InfoPanel, Opposite } from "./styles";
 import { Link } from "react-router-dom";
 import SVG from "../components/SVG/SVG";
 import { Logo } from "./styles";
+
+import { useBlurInChildren } from "../useBlurInChildren";
+import styled from "styled-components";
 
 function Skills() {
   const fade = useSpring({
@@ -16,13 +19,39 @@ function Skills() {
     }
   });
 
+  const StyledLetter = styled(anim.span)``;
+
+  const strOne = "Using ";
+  const strTwo = "Modern Tools";
+  const strThree = "and Best Practices.";
+
+  const firstStringClass = strOne
+    .split("")
+    .map(letter => <StyledLetter>{letter}</StyledLetter>);
+
+  const secondStringClass = strTwo.split("").map((letter, i) => (
+    <StyledLetter key={i} className="delay">
+      {letter}
+    </StyledLetter>
+  ));
+
+  const thirdStringClass = strThree.split("").map((letter, i) => (
+    <StyledLetter key={i} className="delay">
+      {letter}
+    </StyledLetter>
+  ));
+
+  const lineOne = useBlurInChildren(firstStringClass);
+  const lineTwo = useBlurInChildren(secondStringClass);
+  const lineThree = useBlurInChildren(thirdStringClass);
+
   return (
     <Page style={fade}>
       <InfoPanel className="skillsText about_margin" style={fade}>
         <h1>
-          Using <br />
-          Modern Tools <br />
-          and Best Practices.
+          {lineOne} <br />
+          {lineTwo} <br />
+          {lineThree}
         </h1>
         <h2>
           This app is built with <br />
