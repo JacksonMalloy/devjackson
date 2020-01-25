@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     const credentials = require("../service-account.json");
     // Format timestamps
     const timeZone = "America/Los_Angeles";
-    const timeZoneOffset = "-07:00";
+    const timeZoneOffset = "-06:00";
     const dateTimeStart = new Date(
       Date.parse(
         agent.parameters.date.split("T")[0] +
@@ -81,7 +81,7 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
-    (function sendEmail() {
+    function sendEmail() {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -109,7 +109,9 @@ router.post("/", async (req, res) => {
           console.log("Email send: " + info.response);
         }
       });
-    })();
+    }
+
+    sendEmail();
 
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
