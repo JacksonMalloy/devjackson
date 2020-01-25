@@ -39,7 +39,6 @@ router.post("/", async (req, res) => {
 
     const calendar = google.calendar("v3");
     const appointment_type = agent.parameters.AppointmentType;
-    const userEmail = agent.parameters.Email;
 
     // Maybe have to JSONify the object?
     const event = {
@@ -82,6 +81,8 @@ router.post("/", async (req, res) => {
     }
 
     function sendEmail() {
+      const userEmail = agent.parameters.Email;
+
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
