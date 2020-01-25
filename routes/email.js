@@ -20,7 +20,8 @@ function contactForm(agent) {
       service: "gmail",
       auth: {
         user: "jacksmalloy@gmail.com",
-        pass: "Mydogturk5"
+        // MUST ADD PASSWORD HERE
+        pass: "**********"
       }
     });
 
