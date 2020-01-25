@@ -80,7 +80,7 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
-    function sendEmail() {
+    (function sendEmail() {
       const userEmail = agent.parameters.Email;
 
       const transporter = nodemailer.createTransport({
@@ -110,9 +110,7 @@ router.post("/", async (req, res) => {
           console.log("Email send: " + info.response);
         }
       });
-    }
-
-    sendEmail();
+    })();
 
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
