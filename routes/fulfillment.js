@@ -1,6 +1,7 @@
 const express = require("express");
 const { WebhookClient } = require("dialogflow-fulfillment");
 const { google } = require("googleapis");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -38,6 +39,7 @@ router.post("/", async (req, res) => {
 
     const calendar = google.calendar("v3");
     const appointment_type = agent.parameters.AppointmentType;
+    const userEmail = agent.parameters.Email;
 
     // Maybe have to JSONify the object?
     const event = {
@@ -79,8 +81,38 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
+    (function sendEmail() {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "jacksmalloy@gmail.com",
+          // MUST ADD PASSWORD HERE
+          pass: "Mydogturk5"
+        }
+      });
+
+      const mailOptions = {
+        from: "jacksmalloy@gmail.com",
+        to: userEmail,
+        subject: "Appointment Confirmation - Jacks",
+        text: `
+      description: ,
+      start: ${dateTimeStart},
+      end: ${dateTimeEnd}
+          `
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email send: " + info.response);
+        }
+      });
+    })();
+
     agent.add(
-      `Ok, let me see if we can fit you in. ${appointmentTimeString} is fine!.`
+      `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
     );
   }
 
