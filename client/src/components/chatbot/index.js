@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import Cookies from "universal-cookie";
 import { v4 as uuid } from "uuid";
 import composeRefs from "../../composeRefs";
 
-//Render Message Components
-import Buttons from "./Buttons";
-import Gif from "./Gif";
-import Links from "./Links";
-import Message from "./Message";
+import { ChatbotContext } from "../../context";
+import {
+  isNormalMessage,
+  isButtonCard,
+  isGifCard,
+  isLinkCard,
+  renderGif,
+  renderLink
+} from "./utils";
 
 import {
   ChatContainer,
@@ -19,14 +23,18 @@ import {
   ChatSubmit
 } from "./styles";
 
+import Buttons from "./Buttons";
+import Message from "./Message";
+
 //Creating cookie for unique session for DialogFlow
 const cookies = new Cookies();
 
 const Chatbot = () => {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState("");
-  const [showBot, setShowBot] = useState(false);
   const [welcomeSent, setWelcomeSent] = useState(false);
+
+  const { showBot, setShowBot } = useContext(ChatbotContext);
 
   // Creating react references to elements
   let messagesEnd;
@@ -116,39 +124,6 @@ const Chatbot = () => {
     setWelcomeSent(true);
   }
 
-  //Helper functions
-  const isNormalMessage = message => {
-    return message.message && message.message.text && message.message.text.text;
-  };
-
-  const isButtonCard = message => {
-    return (
-      message.message &&
-      message.message.payload &&
-      message.message.payload.fields &&
-      message.message.payload.fields.buttons
-    );
-  };
-
-  const isGifCard = message => {
-    return (
-      message.message &&
-      message.message.payload &&
-      message.message.payload.fields &&
-      message.message.payload.fields.gifs
-    );
-  };
-
-  const isLinkCard = message => {
-    return (
-      message.message &&
-      message.message.payload &&
-      message.message.payload.fields &&
-      message.message.payload.fields.links
-    );
-  };
-
-  //Render Functions
   const renderButtons = fields => {
     return fields.map((button, i) => (
       <Buttons
@@ -156,16 +131,6 @@ const Chatbot = () => {
         payload={button.structValue}
         onClick={handleButtonSend}
       />
-    ));
-  };
-
-  const renderGif = fields => {
-    return fields.map((gif, i) => <Gif key={i} payload={gif.structValue} />);
-  };
-
-  const renderLink = fields => {
-    return fields.map((link, i) => (
-      <Links key={i} payload={link.structValue} />
     ));
   };
 
@@ -201,6 +166,16 @@ const Chatbot = () => {
     }
   };
 
+  // Renders all the messages
+  const renderMessages = stateMessages => {
+    if (stateMessages) {
+      return stateMessages.map((message, i) => {
+        return renderMessage(message, i);
+      });
+    }
+    return null;
+  };
+
   const toggleBot = () => {
     setShowBot(!showBot);
   };
@@ -218,31 +193,23 @@ const Chatbot = () => {
     setValue("");
   };
 
-  const handleButtonSend = async event => {
+  const handleButtonSend = event => {
     const eventText = event.target.innerText;
 
-    await setValue(eventText);
+    setValue(eventText);
     const message = value.split();
-    await df_text_query(message);
-    await setValue("");
-  };
-
-  // Renders all the messages
-  const renderMessages = stateMessages => {
-    if (stateMessages) {
-      return stateMessages.map((message, i) => {
-        return renderMessage(message, i);
-      });
-    }
-    return null;
+    df_text_query(message);
+    setValue("");
   };
 
   // Check for if iOS for mobile switch fix
-  //  renderCheckiOS() {
-  //   if (
-  //     navigator.appVersion.indexOf("Mac") !== -1 &&
-  //     window.innerWidth < 1000
-  //   )
+  // const checkIos = () => {
+  //   return (
+  //     navigator.appVersion.indexOf("Mac") !== -1 && window.innerWidth < 1000
+  //   );
+  // };
+
+  // console.log(checkIos());
 
   if (showBot) {
     return (

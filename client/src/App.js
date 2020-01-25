@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./normalize.scss";
 import "./App.scss";
 import Navbar from "./components/navbar/Navbar";
@@ -10,24 +10,24 @@ import Error from "./pages/Error";
 import { Route, Switch } from "react-router-dom";
 import Chatbot from "./components/chatbot";
 
-import { GlobalProvider } from "./context";
+import { ChatbotContext } from "./context";
 
-class App extends React.Component {
-  render() {
-    return (
-      <GlobalProvider>
-        <Chatbot />
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/skills" component={Skills} />
-          <Route exact path="/work" component={Projects} />
-          <Route component={Error} />
-        </Switch>
-      </GlobalProvider>
-    );
-  }
-}
+const App = () => {
+  const [showBot, setShowBot] = useState(false);
+
+  return (
+    <ChatbotContext.Provider value={{ showBot, setShowBot }}>
+      <Chatbot />
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/skills" component={Skills} />
+        <Route exact path="/work" component={Projects} />
+        <Route component={Error} />
+      </Switch>
+    </ChatbotContext.Provider>
+  );
+};
 
 export default App;
