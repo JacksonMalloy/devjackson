@@ -61,7 +61,37 @@ router.post("/", async (req, res) => {
           return;
         }
 
-        console.log(JSON.stringify(res, null, 2));
+        (function sendEmail() {
+          const userEmail = agent.parameters.Email;
+
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "jacksmalloy@gmail.com",
+              // MUST ADD PASSWORD HERE
+              pass: "Mydogturk5"
+            }
+          });
+
+          const mailOptions = {
+            from: "jacksmalloy@gmail.com",
+            to: userEmail,
+            subject: "Appointment Confirmation - Jacks",
+            text: `
+          description: ,
+          start: ${dateTimeStart},
+          end: ${dateTimeEnd}
+              `
+          };
+
+          transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("Email send: " + info.response);
+            }
+          });
+        })();
       });
     });
 
@@ -79,38 +109,6 @@ router.post("/", async (req, res) => {
 
       callback(authClient);
     }
-
-    (function sendEmail() {
-      const userEmail = agent.parameters.Email;
-
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "jacksmalloy@gmail.com",
-          // MUST ADD PASSWORD HERE
-          pass: "Mydogturk5"
-        }
-      });
-
-      const mailOptions = {
-        from: "jacksmalloy@gmail.com",
-        to: userEmail,
-        subject: "Appointment Confirmation - Jacks",
-        text: `
-      description: ,
-      start: ${dateTimeStart},
-      end: ${dateTimeEnd}
-          `
-      };
-
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email send: " + info.response);
-        }
-      });
-    })();
 
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
