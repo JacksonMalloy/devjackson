@@ -2,10 +2,6 @@ const express = require("express");
 const { WebhookClient } = require("dialogflow-fulfillment");
 const { google } = require("googleapis");
 
-// Authorize Google Calendar
-const CALENDAR_ID = "hces0t4ocvhjfvmi471q79enog@group.calendar.google.com";
-const credentials = require("../service-account.json");
-
 const router = express.Router();
 
 router.post("/", async (req, res) => {
@@ -16,8 +12,12 @@ router.post("/", async (req, res) => {
   }
 
   function makeAppointment(agent) {
-    const timeZone = "Vancouver/British_Columbia";
-    const timeZoneOffset = "-08:00";
+    // Authorize Google Calendar
+    const CALENDAR_ID = "hces0t4ocvhjfvmi471q79enog@group.calendar.google.com";
+    const credentials = require("../service-account.json");
+    // Format timestamps
+    const timeZone = "America/Los_Angeles";
+    const timeZoneOffset = "-07:00";
     const dateTimeStart = new Date(
       Date.parse(
         agent.parameters.date.split("T")[0] +
