@@ -39,16 +39,19 @@ router.post("/", async (req, res) => {
     const calendar = google.calendar("v3");
     const appointment_type = agent.parameters.AppointmentType;
 
+    // Maybe have to JSONify the object?
+    const event = {
+      summary: appointment_type + " Appointment",
+      description: appointment_type,
+      start: { dateTime: dateTimeStart },
+      end: { dateTime: dateTimeEnd }
+    };
+
     authorize(function(authClient) {
       const req = {
-        calendarId: CALENDAR_ID,
         auth: authClient,
-        resource: {
-          summary: appointment_type + " Appointment",
-          description: appointment_type,
-          start: { dateTime: dateTimeStart },
-          end: { dateTime: dateTimeEnd }
-        }
+        calendarId: CALENDAR_ID,
+        resource: event
       };
 
       calendar.events.insert(req, function(err, res) {
@@ -65,7 +68,7 @@ router.post("/", async (req, res) => {
       const authClient = new google.auth.JWT({
         email: "calendarcredentials@devjacks-wcykmq.iam.gserviceaccount.com",
         key: credentials.private_key,
-        scopes: ["https://www.googleapis.com/auth/calendar"]
+        scopes: ["https://www.googleapis.com/auth/calendar.events"]
       });
 
       if (authClient == null) {
