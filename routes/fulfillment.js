@@ -60,38 +60,6 @@ router.post("/", async (req, res) => {
           console.log(err);
           return;
         }
-
-        (function sendEmail() {
-          const userEmail = agent.parameters.Email;
-
-          const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-              user: "jacksmalloy@gmail.com",
-              // MUST ADD PASSWORD HERE
-              pass: "Mydogturk5"
-            }
-          });
-
-          const mailOptions = {
-            from: "jacksmalloy@gmail.com",
-            to: userEmail,
-            subject: "Appointment Confirmation - Jacks",
-            text: `
-          description: ,
-          start: ${dateTimeStart},
-          end: ${dateTimeEnd}
-              `
-          };
-
-          transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-              console.log(error);
-            } else {
-              console.log("Email send: " + info.response);
-            }
-          });
-        })();
       });
     });
 
@@ -113,6 +81,40 @@ router.post("/", async (req, res) => {
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
     );
+
+    const userEmail = agent.parameters.Email;
+
+    (function sendEmail() {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "jacksmalloy@gmail.com",
+          // MUST ADD PASSWORD HERE
+          pass: "Mydogturk5"
+        }
+      });
+
+      const mailOptions = {
+        from: "jacksmalloy@gmail.com",
+        to: userEmail,
+        subject: "Appointment Confirmation - Jacks",
+        text: `
+      description: ,
+      start: ${dateTimeStart},
+      end: ${dateTimeEnd}
+          `
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email send: " + info.response);
+        }
+      });
+
+      agent.add(`I've sent you a confirmation email at ${userEmail}`);
+    })();
   }
 
   //Maps intents to functions
