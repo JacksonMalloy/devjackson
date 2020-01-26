@@ -68,7 +68,17 @@ router.post("/", async (req, res) => {
       );
     });
 
-    (function sendEmail() {
+    sendEmail(function(transporter, mailOptions) {
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email send: " + info.response);
+        }
+      });
+    });
+
+    function sendEmail(callback) {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -86,16 +96,8 @@ router.post("/", async (req, res) => {
         `
       };
 
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email send: " + info.response);
-        }
-      });
-
-      agent.add(`We've sent you a copy of the report to ${email}`);
-    })();
+      callback(transporter, mailOptions);
+    }
 
     function authorize(callback) {
       const authClient = new google.auth.JWT({

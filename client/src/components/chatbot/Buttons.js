@@ -1,5 +1,5 @@
-import React from 'react';
-import { ConvLeftBubble, ConvLeftContainer } from './styles';
+import React from "react";
+import { ConvLeftBubble, ConvLeftContainer } from "./styles";
 
 //Custom JSON Payload Handle within Dialogflow Intent
 const Buttons = props => {
@@ -8,6 +8,7 @@ const Buttons = props => {
   return (
     <ConvLeftContainer primary onClick={props.onClick}>
       <ConvLeftBubble primary>{title.stringValue}</ConvLeftBubble>
+      {console.log(props)}
     </ConvLeftContainer>
   );
 };
