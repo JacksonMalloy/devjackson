@@ -78,7 +78,7 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
-    const userEmail = agent.parameters.Email;
+    const userEmail = agent.parameters.email;
     console.log(userEmail);
 
     agent.add(
