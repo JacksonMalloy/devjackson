@@ -50,13 +50,7 @@ router.post("/", async (req, res) => {
     };
 
     sendEmail(function(transporter, mailOptions) {
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email send: " + info.response);
-        }
-      });
+      transporter.sendMail(mailOptions, function(error, info) {});
     });
 
     authorize(function(authClient) {
@@ -73,6 +67,10 @@ router.post("/", async (req, res) => {
         }
       });
 
+      sendEmail(function(transporter, mailOptions) {
+        transporter.sendMail(mailOptions, function(error, info) {});
+      });
+
       agent.add(
         `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
       );
@@ -82,15 +80,15 @@ router.post("/", async (req, res) => {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
-          user: "six12bot@gmail.com",
-          pass: "95574116q"
+          user: "jacksmalloy@gmail.com",
+          pass: "*/7-=]9840-[65190p"
         }
       });
 
       const mailOptions = {
-        from: "six12bot@gmail.com",
+        from: "jacksmalloy@gmail.com",
         to: userEmail,
-        subject: "Store Report - Example",
+        subject: "Test Email",
         text: `
         testing
         `
