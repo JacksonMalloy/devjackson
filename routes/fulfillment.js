@@ -84,7 +84,7 @@ router.post("/", async (req, res) => {
 
     const userEmail = agent.parameters.Email;
 
-    (function sendEmail() {
+    emailCredentials(function(mailOptions) {
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -94,6 +94,19 @@ router.post("/", async (req, res) => {
         }
       });
 
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email send: " + info.response);
+          agent.add(`I've sent you a confirmation email at ${userEmail}`);
+        }
+      });
+
+      agent.add(`I've sent you a confirmation email at ${userEmail}`);
+    });
+
+    function emailCredentials() {
       const mailOptions = {
         from: "jacksmalloy@gmail.com",
         to: userEmail,
@@ -104,17 +117,8 @@ router.post("/", async (req, res) => {
       end: ${dateTimeEnd}
           `
       };
-
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email send: " + info.response);
-        }
-      });
-
-      agent.add(`I've sent you a confirmation email at ${userEmail}`);
-    })();
+      callback(mailOptions);
+    }
   }
 
   //Maps intents to functions
