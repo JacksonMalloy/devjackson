@@ -66,36 +66,36 @@ router.post("/", async (req, res) => {
       agent.add(
         `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
       );
-
-      (function sendEmail() {
-        const transporter = nodemailer.createTransport({
-          service: "gmail",
-          auth: {
-            user: "six12bot@gmail.com",
-            pass: "95574116q"
-          }
-        });
-
-        const mailOptions = {
-          from: "six12bot@gmail.com",
-          to: userEmail,
-          subject: "Store Report - Example",
-          text: `
-          testing
-          `
-        };
-
-        transporter.sendMail(mailOptions, function(error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("Email send: " + info.response);
-          }
-        });
-
-        agent.add(`We've sent you a copy of the report to ${email}`);
-      })();
     });
+
+    (function sendEmail() {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "six12bot@gmail.com",
+          pass: "95574116q"
+        }
+      });
+
+      const mailOptions = {
+        from: "six12bot@gmail.com",
+        to: userEmail,
+        subject: "Store Report - Example",
+        text: `
+        testing
+        `
+      };
+
+      transporter.sendMail(mailOptions, function(error, info) {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email send: " + info.response);
+        }
+      });
+
+      agent.add(`We've sent you a copy of the report to ${email}`);
+    })();
 
     function authorize(callback) {
       const authClient = new google.auth.JWT({
