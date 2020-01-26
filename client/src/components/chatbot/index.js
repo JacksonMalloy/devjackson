@@ -193,13 +193,13 @@ const Chatbot = () => {
     setValue("");
   };
 
-  const handleButtonSend = event => {
+  const handleButtonSend = async event => {
     const eventText = event.target.innerText;
 
-    setValue(eventText);
+    await setValue(eventText);
     const message = value.split();
-    df_text_query(message);
-    setValue("");
+    await df_text_query(message);
+    await setValue("");
   };
 
   // Check for if iOS for mobile switch fix
