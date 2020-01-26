@@ -69,16 +69,14 @@ router.post("/", async (req, res) => {
               err ||
                 new Error("Requested time conflicts with another appointment")
             );
+            agent.add(
+              `The requested time ${appointmentTimeString} conflicts with another appointment.`
+            );
           } else {
-            calendar.events.insert(req, function(err, res) {
-              if (err) {
-                console.log(err);
-              } else {
-                agent.add(
-                  `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
-                );
-              }
-            });
+            calendar.events.insert(req, function(err, res) {});
+            agent.add(
+              `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
+            );
           }
         }
       );
