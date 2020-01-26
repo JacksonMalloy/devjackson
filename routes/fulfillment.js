@@ -78,7 +78,7 @@ router.post("/", async (req, res) => {
 
         const mailOptions = {
           from: "six12bot@gmail.com",
-          to: email,
+          to: userEmail,
           subject: "Store Report - Example",
           text: `
           testing
