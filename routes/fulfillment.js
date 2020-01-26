@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
     const appointmentTimeString = dateTimeStart.toLocaleString("en-US", {
       month: "long",
       day: "numeric",
-      hour: "numeric",
+      hour: "2-digit",
       timeZone: timeZone
     });
 
