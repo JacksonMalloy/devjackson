@@ -38,12 +38,12 @@ router.post("/", async (req, res) => {
     });
 
     const calendar = google.calendar("v3");
-    const appointment_type = agent.parameters.AppointmentType;
+    const appointmentDescription = agent.parameters.Description;
 
     // Maybe have to JSONify the object?
     const event = {
-      summary: appointment_type + " Appointment",
-      description: appointment_type,
+      summary: appointmentDescription + " Appointment",
+      description: appointmentDescription,
       start: { dateTime: dateTimeStart },
       end: { dateTime: dateTimeEnd }
     };
@@ -78,13 +78,13 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
+    const userEmail = agent.parameters.Email;
+
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
     );
 
     // Send user confirmation email
-
-    const userEmail = agent.parameters.Email;
 
     emailCredentials(function(mailOptions) {
       const transporter = nodemailer.createTransport({
@@ -99,12 +99,9 @@ router.post("/", async (req, res) => {
       transporter.sendMail(mailOptions, function(error, info) {
         if (error) {
           console.log(error);
-        } else {
-          agent.add(`I've sent you a confirmation email at ${userEmail}`);
         }
+        return;
       });
-
-      agent.add(`I've sent you a confirmation email at ${userEmail}`);
     });
 
     function emailCredentials() {
