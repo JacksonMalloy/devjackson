@@ -42,8 +42,8 @@ router.post("/", async (req, res) => {
     const calendar = google.calendar("v3");
 
     const event = {
-      summary: `${appointmentDescription} hey`,
-      description: appointmentDescription,
+      summary: `Chatbot Appointment`,
+      description: `${appointmentDescription} || email: ${userEmail}`,
       start: { dateTime: dateTimeStart },
       end: { dateTime: dateTimeEnd }
     };
