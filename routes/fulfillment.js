@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     const credentials = require("../service-account.json");
     // Format timestamps
     const timeZone = "America/Los_Angeles";
-    const timeZoneOffset = "-06:00";
+    const timeZoneOffset = "-08:00";
     const dateTimeStart = new Date(
       Date.parse(
         agent.parameters.date.split("T")[0] +
@@ -79,40 +79,13 @@ router.post("/", async (req, res) => {
     }
 
     const userEmail = agent.parameters.Email;
+    console.log(userEmail);
 
     agent.add(
       `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
     );
 
     // Send user confirmation email
-
-    emailCredentials(function(mailOptions) {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "jacksmalloy@gmail.com",
-          // MUST ADD PASSWORD HERE
-          pass: "Mydogturk5"
-        }
-      });
-
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        }
-        return;
-      });
-    });
-
-    function emailCredentials() {
-      const mailOptions = {
-        from: "jacksmalloy@gmail.com",
-        to: userEmail,
-        subject: "Appointment Confirmation - Jacks",
-        text: `test`
-      };
-      callback(mailOptions);
-    }
   }
 
   //Maps intents to functions
