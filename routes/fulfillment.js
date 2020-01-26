@@ -37,12 +37,12 @@ router.post("/", async (req, res) => {
       timeZone: timeZone
     });
 
-    const calendar = google.calendar("v3");
-    const appointmentDescription = agent.parameters.Description;
+    const appointmentDescription = agent.parameters.description;
 
-    // Maybe have to JSONify the object?
+    const calendar = google.calendar("v3");
+
     const event = {
-      summary: appointmentDescription + " Appointment",
+      summary: `${appointmentDescription} hey`,
       description: appointmentDescription,
       start: { dateTime: dateTimeStart },
       end: { dateTime: dateTimeEnd }
