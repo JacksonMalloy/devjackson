@@ -56,12 +56,32 @@ router.post("/", async (req, res) => {
         resource: event
       };
 
-      calendar.events.insert(req, function(err, res) {
-        if (err) {
-          console.log(err);
-          return;
+      calendar.events.list(
+        {
+          auth: authClient,
+          calendarId: CALENDAR_ID,
+          timeMin: dateTimeStart.toISOString(),
+          timeMax: dateTimeEnd.toISOString()
+        },
+        function(err, res) {
+          if (err || res.data.items.length > 0) {
+            reject(
+              err ||
+                new Error("Requested time conflicts with another appointment")
+            );
+          } else {
+            calendar.events.insert(req, function(err, res) {
+              if (err) {
+                console.log(err);
+              } else {
+                agent.add(
+                  `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
+                );
+              }
+            });
+          }
         }
-      });
+      );
     });
 
     function authorize(callback) {
@@ -80,10 +100,6 @@ router.post("/", async (req, res) => {
     }
 
     console.log(userEmail);
-
-    agent.add(
-      `Ok, I've booked a slot in the calendar for ${appointmentTimeString}! I also sent a confirmation to ${userEmail}. Is there anything else I could help you with?`
-    );
 
     // Send user confirmation email
   }
