@@ -38,6 +38,7 @@ router.post("/", async (req, res) => {
     });
 
     const appointmentDescription = agent.parameters.description;
+    const userEmail = agent.parameters.email;
 
     const calendar = google.calendar("v3");
 
@@ -78,7 +79,6 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
-    const userEmail = agent.parameters.email;
     console.log(userEmail);
 
     agent.add(
