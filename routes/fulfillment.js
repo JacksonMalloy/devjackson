@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     const credentials = require("../service-account.json");
     // Format timestamps
     const timeZone = "America/Los_Angeles";
-    const timeZoneOffset = "-08:00";
+    const timeZoneOffset = "-06:00";
     const dateTimeStart = new Date(
       Date.parse(
         agent.parameters.date.split("T")[0] +
@@ -37,21 +37,16 @@ router.post("/", async (req, res) => {
       timeZone: timeZone
     });
 
-    const appointmentDescription = agent.parameters.description;
-    const userEmail = agent.parameters.email;
-
     const calendar = google.calendar("v3");
+    const appointment_type = agent.parameters.AppointmentType;
 
+    // Maybe have to JSONify the object?
     const event = {
-      summary: `Chatbot Appointment`,
-      description: `${appointmentDescription} || email: ${userEmail}`,
+      summary: appointment_type + " Appointment",
+      description: appointment_type,
       start: { dateTime: dateTimeStart },
       end: { dateTime: dateTimeEnd }
     };
-
-    sendEmail(function(transporter, mailOptions) {
-      transporter.sendMail(mailOptions, function(error, info) {});
-    });
 
     authorize(function(authClient) {
       const req = {
@@ -65,37 +60,40 @@ router.post("/", async (req, res) => {
           console.log(err);
           return;
         }
-      });
 
-      sendEmail(function(transporter, mailOptions) {
-        transporter.sendMail(mailOptions, function(error, info) {});
-      });
+        (function sendEmail() {
+          const userEmail = agent.parameters.Email;
 
-      agent.add(
-        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via email. Is there anything else I could help you with?`
-      );
+          const transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+              user: "jacksmalloy@gmail.com",
+              // MUST ADD PASSWORD HERE
+              pass: "Mydogturk5"
+            }
+          });
+
+          const mailOptions = {
+            from: "jacksmalloy@gmail.com",
+            to: userEmail,
+            subject: "Appointment Confirmation - Jacks",
+            text: `
+          description: ,
+          start: ${dateTimeStart},
+          end: ${dateTimeEnd}
+              `
+          };
+
+          transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("Email send: " + info.response);
+            }
+          });
+        })();
+      });
     });
-
-    function sendEmail(callback) {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "jacksmalloy@gmail.com",
-          pass: "*/7-=]9840-[65190p"
-        }
-      });
-
-      const mailOptions = {
-        from: "jacksmalloy@gmail.com",
-        to: userEmail,
-        subject: "Test Email",
-        text: `
-        testing
-        `
-      };
-
-      callback(transporter, mailOptions);
-    }
 
     function authorize(callback) {
       const authClient = new google.auth.JWT({
@@ -112,7 +110,9 @@ router.post("/", async (req, res) => {
       callback(authClient);
     }
 
-    // Send user confirmation email
+    agent.add(
+      `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via email. Is there anything else I could help you with?`
+    );
   }
 
   //Maps intents to functions
