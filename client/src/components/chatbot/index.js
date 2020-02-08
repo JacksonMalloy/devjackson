@@ -58,7 +58,7 @@ const Chatbot = () => {
 
   useEffect(() => {
     if (showBot) {
-      messagesEnd.scrollIntoView({ behaviour: "smooth" });
+      messagesEnd.scrollIntoView({ behavior: "smooth" });
     }
     if (chatInput) {
       chatInput.focus();
@@ -196,10 +196,10 @@ const Chatbot = () => {
   const handleButtonSend = async event => {
     const eventText = event.target.innerText;
 
-    await setValue(eventText);
+    setValue(eventText);
     const message = value.split();
     await df_text_query(message);
-    await setValue("");
+    setValue("");
   };
 
   // Check for if iOS for mobile switch fix
