@@ -72,7 +72,7 @@ router.post("/", async (req, res) => {
       });
 
       agent.add(
-        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via ${userEmail}. Is there anything else I could help you with?`
+        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via email. Is there anything else I could help you with?`
       );
     });
 
