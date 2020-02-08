@@ -23,7 +23,7 @@ const App = () => {
         <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/skills" component={Skills} />
-        <Route exact path="/work" component={Projects} />
+        <Route exact path="/contact" component={Projects} />
         <Route component={Error} />
       </Switch>
     </ChatbotContext.Provider>

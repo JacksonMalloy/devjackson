@@ -44,7 +44,7 @@ export default function NavbarIcons() {
       </NavLink>
 
       <NavLink
-        to="/work"
+        to="/contact"
         style={{ textDecoration: "none", fontWeight: "bold" }}
         activeClassName="activeNavIcon"
       >

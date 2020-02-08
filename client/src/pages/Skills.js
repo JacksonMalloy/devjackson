@@ -29,7 +29,7 @@ function Skills() {
           React, Node + Dialogflow
         </h2>
 
-        <Link to="/work/">
+        <Link to="/contact/">
           <button>projects</button>
         </Link>
       </InfoPanel>

@@ -1,6 +1,7 @@
 const express = require("express");
 const { WebhookClient } = require("dialogflow-fulfillment");
 const { google } = require("googleapis");
+const nodemailer = require("nodemailer");
 
 const router = express.Router();
 
@@ -14,6 +15,7 @@ router.post("/", async (req, res) => {
   function makeAppointment(agent) {
     // Authorize Google Calendar
     const CALENDAR_ID = "hces0t4ocvhjfvmi471q79enog@group.calendar.google.com";
+    const credentials = require("../service-account.json");
     // Format timestamps
     const timeZone = "America/Los_Angeles";
     const timeZoneOffset = "-08:00";
@@ -65,10 +67,52 @@ router.post("/", async (req, res) => {
         }
       });
 
+      sendEmail(function(transporter, mailOptions) {
+        transporter.sendMail(mailOptions, function(error, info) {});
+      });
+
       agent.add(
-        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out shortly to ${userEmail}. Is there anything else I could help you with?`
+        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via ${userEmail}. Is there anything else I could help you with?`
       );
     });
+
+    function sendEmail(callback) {
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: "jacksmalloy@gmail.com",
+          pass: "*/7-=]9840-[65190p"
+        }
+      });
+
+      const mailOptions = {
+        from: "jacksmalloy@gmail.com",
+        to: userEmail,
+        subject: "Test Email",
+        text: `
+        testing
+        `
+      };
+
+      callback(transporter, mailOptions);
+    }
+
+    function authorize(callback) {
+      const authClient = new google.auth.JWT({
+        email: "calendarcredentials@devjacks-wcykmq.iam.gserviceaccount.com",
+        key: credentials.private_key,
+        scopes: ["https://www.googleapis.com/auth/calendar.events"]
+      });
+
+      if (authClient == null) {
+        console.log("authentication failed");
+        return;
+      }
+
+      callback(authClient);
+    }
+
+    // Send user confirmation email
   }
 
   //Maps intents to functions
