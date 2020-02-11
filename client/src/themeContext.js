@@ -87,7 +87,7 @@ const HSLTheme_Douglas = {
 
 export const MyThemeProvider = ({ children }) => {
   const [themeState, setThemeState] = React.useState({
-    mode: Theme_SFU
+    mode: Theme_UBC
   });
 
   const mode = themeState.mode;
