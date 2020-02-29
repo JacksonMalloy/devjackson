@@ -4,7 +4,13 @@ import { Link } from "react-router-dom";
 import SVG from "../components/SVG/SVG";
 import { useTheme } from "../themeContext";
 import { withTheme } from "styled-components";
-import { Page, InfoPanel, PageSplit, Logo } from "./styles";
+import {
+  StyledPage,
+  StyledInfoPanel,
+  StyledPageSplit,
+  StyledLogo,
+  StyledButton
+} from "./styles";
 
 const Home = () => {
   const themeToggle = useTheme();
@@ -20,8 +26,8 @@ const Home = () => {
 
   return (
     <>
-      <Page style={fade}>
-        <InfoPanel style={fade}>
+      <StyledPage style={fade}>
+        <StyledInfoPanel style={fade}>
           <h1>
             Hi,
             <br /> I'm Jackson, <br />
@@ -32,21 +38,21 @@ const Home = () => {
           </h2>
 
           <Link to="/about/">
-            <button>about</button>
+            <StyledButton>about</StyledButton>
           </Link>
-        </InfoPanel>
+        </StyledInfoPanel>
 
         <div className="RHS">
-          <Logo
+          <StyledLogo
             onClick={() => themeToggle.toggle()}
             className="removeClickEventMobile"
           >
             <SVG />
-          </Logo>
+          </StyledLogo>
         </div>
 
-        <PageSplit />
-      </Page>
+        <StyledPageSplit />
+      </StyledPage>
     </>
   );
 };

@@ -161,6 +161,11 @@ export const ChatSubmit = styled.button`
 export const ConvLeftContainer = styled.div`
   text-align: left;
   padding-right: 30px;
+  margin: ${props => (props.buttons ? "0.1rem 0 0 0.2rem" : 0)};
+
+  @media (max-width: ${({ theme }) => theme.mobileMax}) {
+    margin: ${props => (props.buttons ? "0.5rem 0 0.5rem 0.2rem" : 0)};
+  }
 `;
 
 export const ConvRightContainer = styled.div`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { animated as anim } from "react-spring";
 
-export const Page = styled(anim.section)`
+export const StyledPage = styled(anim.section)`
   height: 100vw;
   width: 100vw;
 
@@ -52,7 +52,7 @@ export const Page = styled(anim.section)`
   }
 `;
 
-export const InfoPanel = styled(anim.div)`
+export const StyledInfoPanel = styled(anim.div)`
   position: fixed;
   left: 10%;
   top: 50%;
@@ -60,31 +60,6 @@ export const InfoPanel = styled(anim.div)`
   width: 35%;
   max-height: 90%;
   z-index: 2;
-
-  button {
-    background-color: ${props => props.theme.highlightcolor};
-    font-size: 15px;
-    padding: 10px 15px;
-    margin-bottom: 0;
-    font-weight: 800;
-    border: solid 5px transparent;
-    line-height: 100%;
-    letter-spacing: 2px;
-    text-decoration: none;
-    color: ${props => props.theme.primary};
-    position: relative;
-    cursor: pointer;
-    transition: ease 0.5s;
-    text-transform: uppercase;
-
-    &:hover {
-      border: 5px solid ${props => props.theme.subprimary};
-      background: white;
-      transition: ease 0.5s;
-      color: ${props => props.theme.subprimary};
-      background-color: ${props => props.theme.primary};
-    }
-  }
 
   @media (max-width: ${props => props.theme.mobileMax}) {
     width: 100%;
@@ -112,7 +87,41 @@ export const InfoPanel = styled(anim.div)`
   }
 `;
 
-export const PageSplit = styled.div`
+export const StyledButton = styled.button`
+  background-color: ${props => props.theme.highlightcolor};
+  font-size: 15px;
+  padding: 10px 15px;
+  margin-bottom: 0;
+  font-weight: 800;
+  border: solid 5px transparent;
+  line-height: 100%;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: ${props => props.theme.primary};
+  position: relative;
+  cursor: pointer;
+  transition: ease 0.5s;
+  text-transform: ${props => (props.chatbot ? "Capitalize" : "Uppercase")};
+  margin-top: ${props => (props.chatbot ? "0.4rem" : 0)};
+
+  &:hover {
+    border: 5px solid ${props => props.theme.subprimary};
+    background: white;
+    transition: ease 0.5s;
+    color: ${props => props.theme.subprimary};
+    background-color: ${props => props.theme.primary};
+  }
+
+  @media (max-width: ${props => props.theme.mobileMax}) {
+    background-color: ${props => props.theme.highlightcolor};
+    font-size: 11px;
+    padding: 7px 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+  }
+`;
+
+export const StyledPageSplit = styled.div`
   position: fixed;
   height: 110%;
   top: 50%;
@@ -131,7 +140,7 @@ export const PageSplit = styled.div`
   }
 `;
 
-export const Logo = styled.div`
+export const StyledLogo = styled.div`
   width: 400px;
   height: 600px;
   position: absolute;
@@ -149,7 +158,7 @@ export const Logo = styled.div`
   }
 `;
 
-export const Opposite = styled.div`
+export const StyledOpposite = styled.div`
   position: absolute;
   height: 100%;
   top: 50%;
@@ -183,62 +192,5 @@ export const Opposite = styled.div`
     width: 100%;
     z-index: 0;
     overflow-x: hidden;
-  }
-`;
-
-export const Blob = styled.div`
-  & > div {
-    position: absolute;
-    will-change: transform;
-    border-radius: 50%;
-    background: ${props => props.theme.highlightcolor};
-    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-    opacity: 0.6;
-  }
-
-  & > div:nth-child(1) {
-    width: 150px;
-    height: 150px;
-  }
-
-  & > div:nth-child(2) {
-    width: 50px;
-    height: 50px;
-  }
-
-  & > div:nth-child(3) {
-    width: 120px;
-    height: 120px;
-  }
-
-  & > div::after {
-    content: "";
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-  }
-
-  & > div:nth-child(2)::after {
-    top: 70px;
-    left: 70px;
-    width: 70px;
-    height: 70px;
-  }
-
-  & > div:nth-child(3)::after {
-    top: 50px;
-    left: 50px;
-    width: 50px;
-    height: 50px;
-  }
-
-  & {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
   }
 `;

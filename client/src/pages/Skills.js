@@ -1,10 +1,16 @@
 import React from "react";
 import { useSpring } from "react-spring";
 
-import { Page, PageSplit, InfoPanel, Opposite } from "./styles";
+import {
+  StyledPage,
+  StyledPageSplit,
+  StyledInfoPanel,
+  StyledOpposite,
+  StyledLogo,
+  StyledButton
+} from "./styles";
 import { Link } from "react-router-dom";
 import SVG from "../components/SVG/SVG";
-import { Logo } from "./styles";
 
 function Skills() {
   const fade = useSpring({
@@ -17,8 +23,8 @@ function Skills() {
   });
 
   return (
-    <Page style={fade}>
-      <InfoPanel className="skillsText about_margin" style={fade}>
+    <StyledPage style={fade}>
+      <StyledInfoPanel className="skillsText about_margin" style={fade}>
         <h1>
           Using <br />
           Modern Tools <br />
@@ -30,17 +36,17 @@ function Skills() {
         </h2>
 
         <Link to="/contact/">
-          <button>projects</button>
+          <StyledButton>projects</StyledButton>
         </Link>
-      </InfoPanel>
+      </StyledInfoPanel>
       <div className="RHS hideOnDesktop">
-        <Logo className="removeClickEventMobile">
+        <StyledLogo className="removeClickEventMobile">
           <SVG />
-        </Logo>
+        </StyledLogo>
       </div>
-      <PageSplit />
-      <Opposite className="mobile__change"></Opposite>
-    </Page>
+      <StyledPageSplit />
+      <StyledOpposite className="mobile__change"></StyledOpposite>
+    </StyledPage>
   );
 }
 

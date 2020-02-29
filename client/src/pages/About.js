@@ -2,9 +2,15 @@ import React, { lazy, Suspense } from "react";
 import { useSpring } from "react-spring";
 import { Link } from "react-router-dom";
 
-import { Page, InfoPanel, PageSplit, Opposite } from "./styles";
+import {
+  StyledPage,
+  StyledInfoPanel,
+  StyledPageSplit,
+  StyledOpposite,
+  StyledButton,
+  StyledLogo
+} from "./styles";
 import SVG from "../components/SVG/SVG";
-import { Logo } from "./styles";
 
 const Gallery = lazy(() => import("../components/gallery/Gallery"));
 
@@ -19,8 +25,8 @@ export default function About() {
   });
 
   return (
-    <Page className="page-mobile" style={fade}>
-      <InfoPanel className="about_margin" style={fade}>
+    <StyledPage className="page-mobile" style={fade}>
+      <StyledInfoPanel className="about_margin" style={fade}>
         <h1>
           I Build <br />
           Modern User <br />
@@ -33,22 +39,22 @@ export default function About() {
         </h2>
 
         <Link to="/skills/">
-          <button>skills</button>
+          <StyledButton>skills</StyledButton>
         </Link>
-      </InfoPanel>
+      </StyledInfoPanel>
 
       <div className="RHS hideOnDesktop">
-        <Logo className="removeClickEventMobile">
+        <StyledLogo className="removeClickEventMobile">
           <SVG />
-        </Logo>
+        </StyledLogo>
       </div>
 
-      <PageSplit />
-      <Opposite>
+      <StyledPageSplit />
+      <StyledOpposite>
         <Suspense fallback={<></>}>
           <Gallery />
         </Suspense>
-      </Opposite>
-    </Page>
+      </StyledOpposite>
+    </StyledPage>
   );
 }

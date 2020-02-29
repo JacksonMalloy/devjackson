@@ -3,8 +3,15 @@ import { useSpring } from "react-spring";
 
 import WorkGrid from "../components/projects/WorkGrid";
 import SVG from "../components/SVG/SVG";
-import { Page, InfoPanel, Opposite, PageSplit } from "./styles";
-import { Logo } from "./styles";
+import {
+  StyledPage,
+  StyledInfoPanel,
+  StyledOpposite,
+  StyledPageSplit,
+  StyledLogo,
+  StyledButton
+} from "./styles";
+
 import { ChatbotContext } from "../context";
 
 export default function Projects() {
@@ -20,8 +27,8 @@ export default function Projects() {
   });
 
   return (
-    <Page style={fade}>
-      <InfoPanel className="about_margin" style={fade}>
+    <StyledPage style={fade}>
+      <StyledInfoPanel className="about_margin" style={fade}>
         <h1>
           Looking <br />
           to Hire?
@@ -30,17 +37,19 @@ export default function Projects() {
           Please leave my personal <br /> assistant a message.
         </h2>
 
-        <button onClick={() => setShowBot(!showBot)}>contact</button>
-      </InfoPanel>
+        <StyledButton onClick={() => setShowBot(!showBot)}>
+          contact
+        </StyledButton>
+      </StyledInfoPanel>
       <div className="RHS hideOnDesktop">
-        <Logo className="removeClickEventMobile">
+        <StyledLogo className="removeClickEventMobile">
           <SVG />
-        </Logo>
+        </StyledLogo>
       </div>
-      <PageSplit />
-      <Opposite>
+      <StyledPageSplit />
+      <StyledOpposite>
         <WorkGrid />
-      </Opposite>
-    </Page>
+      </StyledOpposite>
+    </StyledPage>
   );
 }

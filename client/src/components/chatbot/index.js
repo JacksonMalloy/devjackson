@@ -195,22 +195,24 @@ const Chatbot = () => {
     setValue(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if (value !== "") {
       const message = value.split();
-      df_text_query(message);
+      await df_text_query(message);
     }
     setValue("");
   };
 
   const handleButtonSend = async event => {
     const eventText = event.target.innerText;
+    const message = eventText.split();
 
-    setValue(eventText);
-    const message = value.split();
-    await df_text_query(message);
-    setValue("");
+    if (message !== "") {
+      await df_text_query(message).then(() => {
+        setValue("");
+      });
+    }
   };
 
   // Check for if iOS for mobile switch fix
@@ -236,9 +238,6 @@ const Chatbot = () => {
           </div>
         </div>
         <ChatContainer>
-          <ChatHeader>
-            <span></span>
-          </ChatHeader>
           <ChatMain className="scrollbar" id="style-4">
             {renderMessages(messages)}
             <div

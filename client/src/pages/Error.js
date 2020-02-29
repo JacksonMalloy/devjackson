@@ -1,14 +1,14 @@
 import React from "react";
 import SVG from "../components/SVG/SVG";
-import { Logo } from "./styles";
+import { StyledLogo } from "./styles";
 
 export default function Error() {
   return (
     <div>
       <div className="RHS hideOnDesktop">
-        <Logo className="removeClickEventMobile">
+        <StyledLogo className="removeClickEventMobile">
           <SVG />
-        </Logo>
+        </StyledLogo>
       </div>
     </div>
   );

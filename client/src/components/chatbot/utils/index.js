@@ -7,30 +7,15 @@ export const isNormalMessage = message => {
 };
 
 export const isButtonCard = message => {
-  return (
-    message.message &&
-    message.message.payload &&
-    message.message.payload.fields &&
-    message.message.payload.fields.buttons
-  );
+  return message.message?.payload?.fields?.buttons;
 };
 
 export const isGifCard = message => {
-  return (
-    message.message &&
-    message.message.payload &&
-    message.message.payload.fields &&
-    message.message.payload.fields.gifs
-  );
+  return message.message?.payload?.fields?.gifs;
 };
 
 export const isLinkCard = message => {
-  return (
-    message.message &&
-    message.message.payload &&
-    message.message.payload.fields &&
-    message.message.payload.fields.links
-  );
+  return message.message?.payload?.fields?.links;
 };
 
 //Render Functions
