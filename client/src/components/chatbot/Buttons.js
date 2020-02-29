@@ -8,7 +8,6 @@ const Buttons = props => {
   return (
     <ConvLeftContainer primary onClick={props.onClick}>
       <ConvLeftBubble primary>{title.stringValue}</ConvLeftBubble>
-      {console.log(props)}
     </ConvLeftContainer>
   );
 };

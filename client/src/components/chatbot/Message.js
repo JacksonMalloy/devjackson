@@ -1,14 +1,14 @@
-import React from 'react';
+import React from "react";
 
 import {
   ConvLeftContainer,
   ConvLeftBubble,
   ConvRightContainer,
   ConvRightBubble
-} from './styles';
+} from "./styles";
 
 const Message = props => {
-  return props.speaks === 'me' ? (
+  return props.speaking === "me" ? (
     <ConvRightContainer>
       <ConvRightBubble>{props.text}</ConvRightBubble>
     </ConvRightContainer>

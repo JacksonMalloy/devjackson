@@ -30,6 +30,8 @@ import Message from "./Message";
 const cookies = new Cookies();
 
 const Chatbot = () => {
+  const [localMessage, setLocalMessage] = useState([]);
+  const [remoteMessage, setRemoteMessage] = useState([]);
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState("");
   const [welcomeSent, setWelcomeSent] = useState(false);
@@ -69,9 +71,19 @@ const Chatbot = () => {
   Sends TEXT query to server
   *****************************/
 
+  useEffect(() => {
+    let messageBatch = [...localMessage];
+    setMessages(messages => [...messages, ...messageBatch]);
+  }, [localMessage]);
+
+  useEffect(() => {
+    let messageBatch = [...remoteMessage];
+    setMessages(messages => [...messages, ...messageBatch]);
+  }, [remoteMessage]);
+
   async function df_text_query(text) {
     let says = {
-      speaks: "me",
+      speaking: "me",
       message: {
         text: {
           text
@@ -79,22 +91,21 @@ const Chatbot = () => {
       }
     };
 
+    setLocalMessage([says]);
+
     const res = await axios.post("/api/df_text_query", {
       text,
       userID: cookies.get("userID")
     });
 
-    // Handles fullfillment routes for dialogflow
-
     let saysBatch = [
-      says,
       ...res.data.fulfillmentMessages.map(message => ({
-        speaks: "bot",
+        speaking: "bot",
         message
       }))
     ];
 
-    setMessages([...messages, ...saysBatch]);
+    setRemoteMessage([...saysBatch]);
   }
 
   /****************************
@@ -110,7 +121,7 @@ const Chatbot = () => {
     // Iterate over responses in the request
     for (let msg of res.data.fulfillmentMessages) {
       let says = {
-        speaks: "bot",
+        speaking: "bot",
         message: msg
       };
 
@@ -139,7 +150,7 @@ const Chatbot = () => {
       return (
         <Message
           key={i}
-          speaks={message.speaks}
+          speaking={message.speaking}
           text={message.message.text.text}
         />
       );
