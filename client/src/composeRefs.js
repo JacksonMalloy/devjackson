@@ -1,3 +1,5 @@
+// https://github.com/seznam/compose-react-refs/blob/master/composeRefs.ts
+
 export default function composeRefs(...refs) {
   if (refs.length === 2) {
     // micro-optimize the hot path
@@ -40,7 +42,7 @@ function composeTwoRefs(ref1, ref2) {
 }
 
 function updateRef(ref, instance) {
-  if (typeof ref === 'function') {
+  if (typeof ref === "function") {
     ref(instance);
   } else {
     ref.current = instance;

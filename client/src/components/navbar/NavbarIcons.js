@@ -1,6 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { NavbarLogo } from "./styles";
+import { StyledNavbarLogo } from "./styles";
 import NavSVG from "../SVG/navSVG";
 import { useTheme } from "../../themeContext";
 
@@ -53,14 +53,14 @@ export default function NavbarIcons() {
           <span>Projects</span>
         </li>
       </NavLink>
-      <NavbarLogo
+      <StyledNavbarLogo
         onClick={() => themeToggle.toggle()}
         className="mobileNavLogo"
       >
         <div>
           <NavSVG />
         </div>
-      </NavbarLogo>
+      </StyledNavbarLogo>
     </nav>
   );
 }

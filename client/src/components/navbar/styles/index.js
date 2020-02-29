@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const NavbarContainer = styled.div`
+export const StyledNavbarContainer = styled.div`
   width: 80px;
   position: fixed;
   height: 100vh;
@@ -157,9 +157,36 @@ export const NavbarContainer = styled.div`
       }
     }
   }
+
+  /* Mobile Landscape Fix */
+  @media (max-height: 400px) {
+    position: fixed;
+    left: 0;
+    width: 80px;
+    height: 100vh;
+
+    nav {
+      display: grid;
+      padding: 5rem 0 2rem 0;
+      text-align: center;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+
+      a {
+        height: 100%;
+        width: 100%;
+        height: 1rem;
+
+        li {
+          height: 1rem;
+        }
+      }
+    }
+  }
 `;
 
-export const NavbarLogo = styled.div`
+export const StyledNavbarLogo = styled.div`
   width: 46px;
   align-content: center;
   position: fixed;

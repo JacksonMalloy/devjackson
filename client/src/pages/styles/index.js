@@ -85,6 +85,14 @@ export const StyledInfoPanel = styled(anim.div)`
     transform: translateY(0%);
     left: 15%;
   }
+
+  @media (max-height: 400px) {
+    top: 8%;
+
+    button {
+      display: none;
+    }
+  }
 `;
 
 export const StyledButton = styled.button`
@@ -155,6 +163,12 @@ export const StyledLogo = styled.div`
     height: 100%;
     width: 100%;
     opacity: 0.1;
+  }
+
+  @media (max-height: 400px) {
+    width: 240px;
+    right: 8rem;
+    top: -4rem;
   }
 `;
 

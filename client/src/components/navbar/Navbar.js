@@ -3,17 +3,17 @@ import NavbarIcons from "./NavbarIcons";
 import SVG from "../SVG/SVG";
 import { useTheme } from "../../themeContext";
 import { withTheme } from "styled-components";
-import { NavbarContainer, NavbarLogo } from "./styles";
+import { StyledNavbarContainer, StyledNavbarLogo } from "./styles";
 
 function Navbar() {
   const themeToggle = useTheme();
 
   return (
     <>
-      <NavbarContainer>
-        <NavbarLogo onClick={() => themeToggle.toggle()}>
+      <StyledNavbarContainer>
+        <StyledNavbarLogo onClick={() => themeToggle.toggle()}>
           <SVG />
-        </NavbarLogo>
+        </StyledNavbarLogo>
 
         <NavbarIcons />
 
@@ -33,7 +33,7 @@ function Navbar() {
             <i className="fab fa-github" />
           </a>
         </ul>
-      </NavbarContainer>
+      </StyledNavbarContainer>
     </>
   );
 }
