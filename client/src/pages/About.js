@@ -1,41 +1,31 @@
-import React, { lazy, Suspense } from "react";
-import { useSpring } from "react-spring";
-import { Link } from "react-router-dom";
+import React, { lazy, Suspense } from 'react'
+import { useSpring } from 'react-spring'
+import { Link } from 'react-router-dom'
 
-import {
-  StyledPage,
-  StyledInfoPanel,
-  StyledPageSplit,
-  StyledOpposite,
-  StyledButton,
-  StyledLogo
-} from "./styles";
-import SVG from "../components/SVG/SVG";
+import { StyledPage, StyledInfoPanel, StyledPageSplit, StyledOpposite, StyledButton, StyledLogo } from './styles'
+import SVG from '../components/SVG/SVG'
 
-const Gallery = lazy(() => import("../components/gallery/Gallery"));
+const Gallery = lazy(() => import('../components/gallery/Gallery'))
 
 export default function About() {
   const fade = useSpring({
     from: {
-      opacity: 0
+      opacity: 0,
     },
     to: {
-      opacity: 1
-    }
-  });
+      opacity: 1,
+    },
+  })
 
   return (
     <StyledPage className="page-mobile" style={fade}>
       <StyledInfoPanel className="about_margin" style={fade}>
-        <h1>
-          I Build <br />
-          Modern User <br />
-          Experiences.
-        </h1>
+        <h1>This is Me</h1>
 
         <h2>
-          Performance matters.
-          <br /> Accessibility matters. <br /> Simplicity matters.
+          I'm a professional software developer <br />
+          from Vancouver, BC who loves soccer,
+          <br /> guitar and code.
         </h2>
 
         <Link to="/skills/">
@@ -56,5 +46,5 @@ export default function About() {
         </Suspense>
       </StyledOpposite>
     </StyledPage>
-  );
+  )
 }

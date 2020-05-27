@@ -17,6 +17,7 @@
   "author": "Jackson Malloy",
   "license": "MIT",
   "dependencies": {
+    "@sendgrid/mail": "^7.1.1",
     "actions-on-google": "^2.12.0",
     "body-parser": "^1.19.0",
     "compression": "^1.7.4",

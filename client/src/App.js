@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import "./normalize.scss";
-import "./App.scss";
-import Navbar from "./components/navbar/Navbar";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Skills from "./pages/Skills";
-import Error from "./pages/Error";
-import { Route, Switch } from "react-router-dom";
-import Chatbot from "./components/chatbot";
+import React, { useState } from 'react'
+import './normalize.scss'
+import './App.scss'
+import Navbar from './components/navbar/Navbar'
+import Home from './pages/Home'
+import About from './pages/About'
+import Projects from './pages/Projects'
+import Skills from './pages/Skills'
+import Error from './pages/Error'
+import { Route, Switch } from 'react-router-dom'
+import Chatbot from './components/chatbot'
 
-import { ChatbotContext } from "./context";
+import { ChatbotContext } from './context'
 
 const App = () => {
-  const [showBot, setShowBot] = useState(false);
+  const [showBot, setShowBot] = useState(false)
 
   return (
     <ChatbotContext.Provider value={{ showBot, setShowBot }}>
@@ -27,7 +27,7 @@ const App = () => {
         <Route component={Error} />
       </Switch>
     </ChatbotContext.Provider>
-  );
-};
+  )
+}
 
-export default App;
+export default App

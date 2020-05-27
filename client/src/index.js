@@ -1,9 +1,9 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { HashRouter as Router } from 'react-router-dom';
-import { MyThemeProvider } from './themeContext';
-import { GlobalStyle } from './globalStyles';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
+import { HashRouter as Router } from 'react-router-dom'
+import { MyThemeProvider } from './themeContext'
+import { GlobalStyle } from './globalStyles'
 
 ReactDOM.render(
   <MyThemeProvider>
@@ -13,4 +13,4 @@ ReactDOM.render(
     </Router>
   </MyThemeProvider>,
   document.getElementById('root')
-);
+)

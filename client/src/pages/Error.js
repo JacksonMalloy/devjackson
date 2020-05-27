@@ -1,6 +1,6 @@
-import React from "react";
-import SVG from "../components/SVG/SVG";
-import { StyledLogo } from "./styles";
+import React from 'react'
+import SVG from '../components/SVG/SVG'
+import { StyledLogo } from './styles'
 
 export default function Error() {
   return (
@@ -11,5 +11,5 @@ export default function Error() {
         </StyledLogo>
       </div>
     </div>
-  );
+  )
 }

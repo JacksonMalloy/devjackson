@@ -2,6 +2,9 @@ const express = require("express");
 const { WebhookClient } = require("dialogflow-fulfillment");
 const { google } = require("googleapis");
 const nodemailer = require("nodemailer");
+const sgMail = require('@sendgrid/mail');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const router = express.Router();
 
@@ -64,57 +67,22 @@ router.post("/", async (req, res) => {
       });
 
       agent.add(
-        `Ok, I've booked a slot in my developers calendar for ${appointmentTimeString}! He will reach out via email to ${userEmail}. Is there anything else I could help you with?`
+        `Awesome! Your meeting for ${appointmentTimeString} is set! I'm sure he will reach out to your email at ${userEmail} to say hello. Is there anything else I could help you with?`
       );
     });
 
-    sendEmail(function(transporter, mailOptions) {
-      transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-          console.log(error);
-        } else {
-          console.log("Email send: " + info.response);
-        }
-      });
-    });
-
-    function sendEmail(callback) {
-      const transporter = nodemailer.createTransport({
-        service: "gmail",
-        auth: {
-          user: "six12bot@gmail.com",
-          pass: "95574116q"
-        }
-      });
-
-      const mailOptions = {
-        from: "six12bot@gmail.com",
+    function sendEmail() {
+      const msg = {
         to: userEmail,
-        subject: "Store Report - Example",
-        text: `
-        testing
-        `
+        from: 'tim@devjacks.com',
+        subject: 'Meeting with Jackson',
+        text: 'and easy to do anywhere, even with Node.js',
+        html: '<strong>and easy to do anywhere, even with Node.js</strong>',
       };
-
-      callback(transporter, mailOptions);
+      sgMail.send(msg);
     }
 
-    function authorize(callback) {
-      const authClient = new google.auth.JWT({
-        email: "calendarcredentials@devjacks-wcykmq.iam.gserviceaccount.com",
-        key: credentials.private_key,
-        scopes: ["https://www.googleapis.com/auth/calendar.events"]
-      });
-
-      if (authClient == null) {
-        console.log("authentication failed");
-        return;
-      }
-
-      callback(authClient);
-    }
-
-    // Send user confirmation email
+    sendEmail()
   }
 
   //Maps intents to functions

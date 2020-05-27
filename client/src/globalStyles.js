@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
-  
+
 
 @font-face {
   font-family: 'AmstelvarAlpha';
@@ -14,18 +14,18 @@ export const GlobalStyle = createGlobalStyle`
 }
 
 h1 {
-  color: ${props => props.theme.subprimary};
+  color: ${(props) => props.theme.subprimary};
 }
 
 h2 {
-  color: ${props => props.theme.subprimary};
+  color: ${(props) => props.theme.subprimary};
 }
 
 html {
   overflow: hidden;
   height: 100%;
   font-size: 15px;
-  background-color: ${props => props.theme.backgroundcolor}
+  background-color: ${(props) => props.theme.backgroundcolor}
 }
 
 p {
@@ -40,7 +40,7 @@ p {
 }
 
 
-  
+
 .toggleNavButton {
     margin: 0;
     outline: none;
@@ -48,13 +48,12 @@ p {
     z-index: 101;
     position: absolute;
     top: 0px;
-    right: 2vw;
+    right: 1vw;
     width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .navIconContainer {
@@ -84,7 +83,7 @@ p {
       position: absolute;
       height: 3.5px;
       width: 100%;
-      background: ${props => props.theme.subprimary};
+      background: ${(props) => props.theme.subprimary};
       border-radius: 19px;
       opacity: 1;
       left: 0;
@@ -131,7 +130,7 @@ p {
       position: absolute;
       height: 3.5px;
       width: 100%;
-      background: ${props => props.theme.subprimary};
+      background: ${(props) => props.theme.subprimary};
       border-radius: 19px;
       opacity: 1;
       left: 0;
@@ -170,4 +169,4 @@ p {
     width: 0%;
   }
 }
-`;
+`

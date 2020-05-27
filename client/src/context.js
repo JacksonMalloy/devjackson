@@ -1,3 +1,3 @@
-import { createContext } from "react";
+import { createContext } from 'react'
 
-export const ChatbotContext = createContext(null);
+export const ChatbotContext = createContext(null)

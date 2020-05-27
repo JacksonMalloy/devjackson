@@ -1,28 +1,22 @@
-import React from "react";
-import { useSpring } from "react-spring";
-import { Link } from "react-router-dom";
-import SVG from "../components/SVG/SVG";
-import { useTheme } from "../themeContext";
-import { withTheme } from "styled-components";
-import {
-  StyledPage,
-  StyledInfoPanel,
-  StyledPageSplit,
-  StyledLogo,
-  StyledButton
-} from "./styles";
+import React from 'react'
+import { useSpring } from 'react-spring'
+import { Link } from 'react-router-dom'
+import SVG from '../components/SVG/SVG'
+import { useTheme } from '../themeContext'
+import { withTheme } from 'styled-components'
+import { StyledPage, StyledInfoPanel, StyledPageSplit, StyledLogo, StyledButton } from './styles'
 
 const Home = () => {
-  const themeToggle = useTheme();
+  const themeToggle = useTheme()
 
   const fade = useSpring({
     from: {
-      opacity: 0
+      opacity: 0,
     },
     to: {
-      opacity: 1
-    }
-  });
+      opacity: 1,
+    },
+  })
 
   return (
     <>
@@ -34,7 +28,9 @@ const Home = () => {
             Web Developer
           </h1>
           <h2>
-            For all sorts of stakeholders, <br />I build software that matters.
+            JavaScript specialist,
+            <br /> with experience building <br />
+            commercial software.
           </h2>
 
           <Link to="/about/">
@@ -43,10 +39,7 @@ const Home = () => {
         </StyledInfoPanel>
 
         <div className="RHS">
-          <StyledLogo
-            onClick={() => themeToggle.toggle()}
-            className="removeClickEventMobile"
-          >
+          <StyledLogo onClick={() => themeToggle.toggle()} className="removeClickEventMobile">
             <SVG />
           </StyledLogo>
         </div>
@@ -54,7 +47,7 @@ const Home = () => {
         <StyledPageSplit />
       </StyledPage>
     </>
-  );
-};
+  )
+}
 
-export default withTheme(Home);
+export default withTheme(Home)

@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const ChatContainer = styled.section`
   right: 0;
   bottom: 0;
   z-index: 100;
-  height: 100%;
+  height: 100vh;
   width: 50vw;
   position: fixed;
   border-radius: 3px;
@@ -13,8 +13,9 @@ export const ChatContainer = styled.section`
   overflow: none;
   display: flex;
   flex-direction: column;
+  background-color: ${({ theme }) => theme.primary};
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     height: 100%;
     width: 100vw;
     position: fixed;
@@ -22,22 +23,21 @@ export const ChatContainer = styled.section`
     left: 0;
     bottom: 0;
     border-radius: 0px;
-    background-color: ${props => props.theme.backgroundcolor};
+    background-color: ${(props) => props.theme.backgroundcolor};
     padding: 10px;
   }
-`;
+`
 
 export const ChatHeader = styled.header`
   padding: 10px 0px 30px 0px;
   display: flex;
   justify-content: space-between;
-
   background-repeat: no-repeat;
   background-size: 6%;
   background-position: left;
   font-size: 3rem;
   font-weight: bold;
-  color: ${props => props.theme.subprimary};
+  color: ${(props) => props.theme.subprimary};
 
   span {
     padding-left: 55px;
@@ -49,11 +49,11 @@ export const ChatHeader = styled.header`
     width: 100%;
     display: none;
   }
-`;
+`
 
 export const CloseChat = styled.span`
   cursor: pointer;
-`;
+`
 
 export const ChatMain = styled.div`
   position: relative;
@@ -64,17 +64,17 @@ export const ChatMain = styled.div`
   margin-bottom: 10px;
 
   &#style-4::-webkit-scrollbar-track {
-    background-color: ${props => props.theme.primary};
+    background-color: ${(props) => props.theme.primary};
   }
 
   &#style-4::-webkit-scrollbar {
     width: 5px;
-    background-color: ${props => props.theme.primary};
+    background-color: ${(props) => props.theme.primary};
   }
 
   &#style-4::-webkit-scrollbar-thumb {
-    background-color: ${props => props.theme.subprimary};
-    border: 2px solid ${props => props.theme.highlightcolor};
+    background-color: ${(props) => props.theme.subprimary};
+    border: 2px solid ${(props) => props.theme.highlightcolor};
   }
 
   @media (max-width: 700px) {
@@ -83,7 +83,7 @@ export const ChatMain = styled.div`
     margin-bottom: 0px;
     padding-top: 30px;
   }
-`;
+`
 
 export const ChatFooter = styled.form`
   display: flex;
@@ -108,14 +108,14 @@ export const ChatFooter = styled.form`
     font-size: 1rem;
     height: 60px;
   }
-`;
+`
 
 export const ChatInput = styled.input`
   margin-bottom: 0;
   border: none;
   height: 100%;
   width: 100%;
-  color: ${props => props.theme.subprimary};
+  color: ${(props) => props.theme.subprimary};
   background-color: inherit;
 
   &:focus {
@@ -127,22 +127,22 @@ export const ChatInput = styled.input`
     padding-right: 15px;
     margin-left: 5px;
   }
-`;
+`
 
 export const ChatSubmit = styled.button`
   height: 40px;
   width: 110px;
   cursor: pointer;
-  background-color: ${props => props.theme.highlightcolor};
+  background-color: ${(props) => props.theme.highlightcolor};
   border: none;
   border-radius: 10px;
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   box-shadow: 0px 0px 5px 1px inherit;
 
   &:disabled {
-    box-shadow: 0px 0px 10px 5px ${props => props.theme.primary} inset;
-    background-color: ${props => props.theme.primary};
-    color: ${props => props.theme.subprimary};
+    box-shadow: 0px 0px 10px 5px ${(props) => props.theme.primary} inset;
+    background-color: ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.subprimary};
     opacity: 0.5;
     cursor: auto;
   }
@@ -156,27 +156,31 @@ export const ChatSubmit = styled.button`
       display: block;
     }
   }
-`;
+`
 
 export const ConvLeftContainer = styled.div`
   text-align: left;
   padding-right: 30px;
-  margin: ${props => (props.buttons ? "0.1rem 0 0 0.2rem" : 0)};
+  margin: ${(props) => (props.buttons ? '0.1rem 0 0 0.2rem' : 0)};
 
   @media (max-width: ${({ theme }) => theme.mobileMax}) {
-    margin: ${props => (props.buttons ? "0.5rem 0 0.5rem 0.2rem" : 0)};
+    margin: ${(props) => (props.buttons ? '0.5rem 0 0.5rem 0.2rem' : 0)};
   }
-`;
+`
 
 export const ConvRightContainer = styled.div`
   text-align: right;
-  padding-right: 30px;
-`;
+  padding-right: 60px;
+
+  @media (max-width: ${({ theme }) => theme.mobileMax}) {
+    padding-right: 30px;
+  }
+`
 
 export const ConvLeftBubble = styled.div`
   max-width: 350px;
   height: 100%;
-  border-radius: ${props => (props.primary ? "20px" : "10px")};
+  border-radius: ${(props) => (props.primary ? '20px' : '10px')};
   margin: 10px 0px;
   width: inherit;
   overflow-wrap: break-word;
@@ -184,20 +188,20 @@ export const ConvLeftBubble = styled.div`
   display: inline-block;
   font-size: 15px;
   word-spacing: 0.3px;
-  color: ${props => props.theme.subprimary};
+  color: ${(props) => props.theme.subprimary};
   text-align: start;
-  border-bottom-left-radius: ${props => (props.primary ? "20px" : "4px")};
-  background-color: ${props => props.theme.primary};
+  border-bottom-left-radius: ${(props) => (props.primary ? '20px' : '4px')};
+  background-color: ${(props) => props.theme.primary};
 
-  border: ${props => (props.primary ? "1px solid #333333" : "none")};
-  border-color: ${props => (props.primary ? props.theme.subprimary : "none")};
-  cursor: ${props => (props.primary ? "pointer" : "auto")};
+  border: ${(props) => (props.primary ? '1px solid #333333' : 'none')};
+  border-color: ${(props) => (props.primary ? props.theme.subprimary : 'none')};
+  cursor: ${(props) => (props.primary ? 'pointer' : 'auto')};
 
   @media (max-width: 700px) {
     margin: 2px;
     padding: 7px 15px;
   }
-`;
+`
 
 export const ConvRightBubble = styled.div`
   max-width: 350px;
@@ -210,13 +214,13 @@ export const ConvRightBubble = styled.div`
   display: inline-block;
   font-size: 15px;
   word-spacing: 0.3px;
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   text-align: start;
   border-bottom-right-radius: 4px;
-  background-color: ${props => props.theme.highlightcolor};
+  background-color: ${(props) => props.theme.highlightcolor};
 
   @media (max-width: 700px) {
     margin: 5px;
     padding: 7px 15px;
   }
-`;
+`

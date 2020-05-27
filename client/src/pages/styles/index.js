@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { animated as anim } from "react-spring";
+import styled from 'styled-components'
+import { animated as anim } from 'react-spring'
 
 export const StyledPage = styled(anim.section)`
   height: 100vw;
@@ -13,10 +13,10 @@ export const StyledPage = styled(anim.section)`
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: ${props => props.theme.backgroundcolor};
+    background-color: ${(props) => props.theme.backgroundcolor};
   }
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     display: flex;
     flex-direction: column;
     height: auto;
@@ -45,12 +45,12 @@ export const StyledPage = styled(anim.section)`
     }
   }
 
-  @media (min-width: ${props => props.theme.tabletMax}) {
+  @media (min-width: ${(props) => props.theme.tabletMax}) {
     &.hideOnDesktop {
       display: none;
     }
   }
-`;
+`
 
 export const StyledInfoPanel = styled(anim.div)`
   position: fixed;
@@ -61,7 +61,7 @@ export const StyledInfoPanel = styled(anim.div)`
   max-height: 90%;
   z-index: 2;
 
-  @media (max-width: ${props => props.theme.mobileMax}) {
+  @media (max-width: ${(props) => props.theme.mobileMax}) {
     width: 100%;
     top: 25%;
     text-align: left;
@@ -69,7 +69,7 @@ export const StyledInfoPanel = styled(anim.div)`
     left: 5.5% !important;
 
     button {
-      background-color: ${props => props.theme.highlightcolor};
+      background-color: ${(props) => props.theme.highlightcolor};
       font-size: 11px;
       padding: 7px 12px;
       font-weight: 800;
@@ -78,7 +78,7 @@ export const StyledInfoPanel = styled(anim.div)`
     }
   }
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     width: 100%;
     top: 25%;
     text-align: left;
@@ -93,10 +93,10 @@ export const StyledInfoPanel = styled(anim.div)`
       display: none;
     }
   }
-`;
+`
 
 export const StyledButton = styled.button`
-  background-color: ${props => props.theme.highlightcolor};
+  background-color: ${(props) => props.theme.highlightcolor};
   font-size: 15px;
   padding: 10px 15px;
   margin-bottom: 0;
@@ -105,29 +105,29 @@ export const StyledButton = styled.button`
   line-height: 100%;
   letter-spacing: 2px;
   text-decoration: none;
-  color: ${props => props.theme.primary};
+  color: ${(props) => props.theme.primary};
   position: relative;
   cursor: pointer;
   transition: ease 0.5s;
-  text-transform: ${props => (props.chatbot ? "Capitalize" : "Uppercase")};
-  margin-top: ${props => (props.chatbot ? "0.4rem" : 0)};
+  text-transform: ${(props) => (props.chatbot ? 'Capitalize' : 'Uppercase')};
+  margin-top: ${(props) => (props.chatbot ? '0.4rem' : 0)};
 
   &:hover {
-    border: 5px solid ${props => props.theme.subprimary};
+    border: 5px solid ${(props) => props.theme.subprimary};
     background: white;
     transition: ease 0.5s;
-    color: ${props => props.theme.subprimary};
-    background-color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.subprimary};
+    background-color: ${(props) => props.theme.primary};
   }
 
-  @media (max-width: ${props => props.theme.mobileMax}) {
-    background-color: ${props => props.theme.highlightcolor};
+  @media (max-width: ${(props) => props.theme.mobileMax}) {
+    background-color: ${(props) => props.theme.highlightcolor};
     font-size: 11px;
     padding: 7px 12px;
     font-weight: 800;
     letter-spacing: 2px;
   }
-`;
+`
 
 export const StyledPageSplit = styled.div`
   position: fixed;
@@ -137,16 +137,16 @@ export const StyledPageSplit = styled.div`
   width: 50vw;
   background-image: linear-gradient(
     to right,
-    ${props => props.theme.backgroundcolor},
-    ${props => props.theme.primary}
+    ${(props) => props.theme.backgroundcolor},
+    ${(props) => props.theme.primary}
   );
   z-index: 1;
-  box-shadow: 0px 0px 10px ${props => props.theme.subprimary};
+  box-shadow: 0px 0px 10px ${(props) => props.theme.subprimary};
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     display: none;
   }
-`;
+`
 
 export const StyledLogo = styled.div`
   width: 400px;
@@ -158,7 +158,7 @@ export const StyledLogo = styled.div`
   left: auto;
   margin: auto;
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     display: block;
     height: 100%;
     width: 100%;
@@ -170,7 +170,7 @@ export const StyledLogo = styled.div`
     right: 8rem;
     top: -4rem;
   }
-`;
+`
 
 export const StyledOpposite = styled.div`
   position: absolute;
@@ -188,7 +188,7 @@ export const StyledOpposite = styled.div`
     justify-content: center;
   }
 
-  @media (max-width: ${props => props.theme.tabletMax}) {
+  @media (max-width: ${(props) => props.theme.tabletMax}) {
     position: relative;
     bottom: 0px;
     top: auto;
@@ -196,7 +196,7 @@ export const StyledOpposite = styled.div`
     transform: translate(0%);
   }
 
-  @media (max-width: ${props => props.theme.mobileMax}) {
+  @media (max-width: ${(props) => props.theme.mobileMax}) {
     overflow-x: visible;
     position: relative;
     height: 100%;
@@ -207,4 +207,4 @@ export const StyledOpposite = styled.div`
     z-index: 0;
     overflow-x: hidden;
   }
-`;
+`

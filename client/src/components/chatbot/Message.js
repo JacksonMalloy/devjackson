@@ -1,22 +1,17 @@
-import React from "react";
+import React from 'react'
 
-import {
-  ConvLeftContainer,
-  ConvLeftBubble,
-  ConvRightContainer,
-  ConvRightBubble
-} from "./styles";
+import { ConvLeftContainer, ConvLeftBubble, ConvRightContainer, ConvRightBubble } from './styles'
 
-const Message = props => {
-  return props.speaking === "me" ? (
+const Message = ({ speaking, text }) => {
+  return speaking === 'me' ? (
     <ConvRightContainer>
-      <ConvRightBubble>{props.text}</ConvRightBubble>
+      <ConvRightBubble>{text}</ConvRightBubble>
     </ConvRightContainer>
   ) : (
     <ConvLeftContainer>
-      <ConvLeftBubble>{props.text}</ConvLeftBubble>
+      <ConvLeftBubble>{text}</ConvLeftBubble>
     </ConvLeftContainer>
-  );
-};
+  )
+}
 
-export default Message;
+export default Message

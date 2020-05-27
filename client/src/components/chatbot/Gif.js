@@ -1,5 +1,5 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react'
+import styled from 'styled-components'
 
 const GifContainer = styled.div`
   width: 100%;
@@ -15,17 +15,17 @@ const GifContainer = styled.div`
     border-top-left-radius: 0px;
     width: 100%;
   }
-`;
+`
 
 //Custom JSON Payload Handle within Dialogflow Intent
-const Gif = props => {
-  const { link } = props.payload.fields.cards.structValue.fields;
+const Gif = (props) => {
+  const { link } = props.payload.fields.cards.structValue.fields
 
   return (
     <GifContainer>
       <img src={link.stringValue} alt="this is a gif from DF" />
     </GifContainer>
-  );
-};
+  )
+}
 
-export default Gif;
+export default Gif

@@ -1,219 +1,188 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import Cookies from "universal-cookie";
-import { v4 as uuid } from "uuid";
-import composeRefs from "../../composeRefs";
+import React, { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
+import Cookies from 'universal-cookie'
+import { v4 as uuid } from 'uuid'
+import composeRefs from '../../composeRefs'
 
-import { ChatbotContext } from "../../context";
-import {
-  isNormalMessage,
-  isButtonCard,
-  isGifCard,
-  isLinkCard,
-  renderGif,
-  renderLink
-} from "./utils";
+import { ChatbotContext } from '../../context'
+import { isNormalMessage, isButtonCard, isGifCard, isLinkCard, renderGif, renderLink } from './utils'
 
-import {
-  ChatContainer,
-  ChatFooter,
-  ChatMain,
-  ChatHeader,
-  ChatInput,
-  ChatSubmit
-} from "./styles";
+import { ChatContainer, ChatFooter, ChatMain, ChatInput, ChatSubmit } from './styles'
 
-import Buttons from "./Buttons";
-import Message from "./Message";
+import Buttons from './Buttons'
+import Message from './Message'
 
 //Creating cookie for unique session for DialogFlow
-const cookies = new Cookies();
+const cookies = new Cookies()
 
 const Chatbot = () => {
-  const [localMessage, setLocalMessage] = useState([]);
-  const [remoteMessage, setRemoteMessage] = useState([]);
-  const [messages, setMessages] = useState([]);
-  const [value, setValue] = useState("");
-  const [welcomeSent, setWelcomeSent] = useState(false);
+  const [localMessage, setLocalMessage] = useState([])
+  const [remoteMessage, setRemoteMessage] = useState([])
+  const [messages, setMessages] = useState([])
+  const [value, setValue] = useState('')
+  const [welcomeSent, setWelcomeSent] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
-  const { showBot, setShowBot } = useContext(ChatbotContext);
+  const { showBot, setShowBot } = useContext(ChatbotContext)
 
   // Creating react references to elements
-  let messagesEnd;
-  let chatInput;
+  let messagesEnd
+  let chatInput
 
   // Setting the cookie using uuid
-  if (!cookies.get("userID")) {
-    cookies.set("userID", uuid(), { path: "/" });
+  if (!cookies.get('userID')) {
+    cookies.set('userID', uuid(), { path: '/' })
   }
 
-  let inputRef = React.createRef();
+  let inputRef = React.createRef()
 
   // Helper function to delay on component mount
-  const resolveAfterXSeconds = time => {
-    return new Promise(resolve => {
+  const resolveAfterXSeconds = (time) => {
+    return new Promise((resolve) => {
       setTimeout(() => {
-        resolve(time);
-      }, time * 500);
-    });
-  };
+        resolve(time)
+      }, time * 500)
+    })
+  }
 
   useEffect(() => {
     if (showBot) {
-      messagesEnd.scrollIntoView({ behavior: "smooth" });
+      messagesEnd.scrollIntoView({ behavior: 'smooth' })
     }
     if (chatInput) {
-      chatInput.focus();
+      chatInput.focus()
     }
-  });
+  })
 
   /****************************
   Sends TEXT query to server
   *****************************/
 
   useEffect(() => {
-    let messageBatch = [...localMessage];
-    setMessages(messages => [...messages, ...messageBatch]);
-  }, [localMessage]);
+    let messageBatch = [...localMessage]
+    setMessages((messages) => [...messages, ...messageBatch])
+  }, [localMessage])
 
   useEffect(() => {
-    let messageBatch = [...remoteMessage];
-    setMessages(messages => [...messages, ...messageBatch]);
-  }, [remoteMessage]);
+    let messageBatch = [...remoteMessage]
+    setMessages((messages) => [...messages, ...messageBatch])
+  }, [remoteMessage])
+
+  useEffect(() => {}, [])
 
   async function df_text_query(text) {
     let says = {
-      speaking: "me",
+      speaking: 'me',
       message: {
         text: {
-          text
-        }
-      }
-    };
+          text,
+        },
+      },
+    }
 
-    setLocalMessage([says]);
+    setLocalMessage([says])
 
-    const res = await axios.post("/api/df_text_query", {
+    const res = await axios.post('/api/df_text_query', {
       text,
-      userID: cookies.get("userID")
-    });
+      userID: cookies.get('userID'),
+    })
 
     let saysBatch = [
-      ...res.data.fulfillmentMessages.map(message => ({
-        speaking: "bot",
-        message
-      }))
-    ];
+      ...res.data.fulfillmentMessages.map((message) => ({
+        speaking: 'bot',
+        message,
+      })),
+    ]
 
-    setRemoteMessage([...saysBatch]);
+    setRemoteMessage([...saysBatch])
   }
+
+  useEffect(() => {
+    if (localMessage) {
+      setValue('')
+    }
+  }, [localMessage])
 
   /****************************
   Sends EVENT query to server
   *****************************/
-
   async function df_event_query(event) {
-    const res = await axios.post("/api/df_event_query", {
+    const res = await axios.post('/api/df_event_query', {
       event,
-      userID: cookies.get("userID")
-    });
+      userID: cookies.get('userID'),
+    })
 
     // Iterate over responses in the request
     for (let msg of res.data.fulfillmentMessages) {
       let says = {
-        speaking: "bot",
-        message: msg
-      };
+        speaking: 'bot',
+        message: msg,
+      }
 
-      setMessages([...messages, says]);
+      setMessages([...messages, says])
     }
   }
 
   if (!welcomeSent) {
-    resolveAfterXSeconds(1.5);
-    df_event_query("Welcome");
-    setWelcomeSent(true);
+    resolveAfterXSeconds(1)
+    df_event_query('Welcome')
+    setWelcomeSent(true)
   }
 
-  const renderButtons = fields => {
-    return fields.map((button, i) => (
-      <Buttons
-        key={i}
-        payload={button.structValue}
-        onClick={handleButtonSend}
-      />
-    ));
-  };
+  const renderButtons = (fields) => {
+    return fields.map((button, i) => <Buttons key={i} payload={button.structValue} onClick={handleButtonSend} />)
+  }
 
   const renderMessage = (message, i) => {
     if (isNormalMessage(message)) {
-      return (
-        <Message
-          key={i}
-          speaking={message.speaking}
-          text={message.message.text.text}
-        />
-      );
+      return <Message key={i} speaking={message.speaking} text={message.message.text.text} />
     } else if (isButtonCard(message)) {
-      return (
-        <div>
-          {renderButtons(
-            message.message.payload.fields.buttons.listValue.values
-          )}
-        </div>
-      );
+      return <div>{renderButtons(message.message.payload.fields.buttons.listValue.values)}</div>
     } else if (isGifCard(message)) {
-      return (
-        <div>
-          {renderGif(message.message.payload.fields.gifs.listValue.values)}
-        </div>
-      );
+      return <div>{renderGif(message.message.payload.fields.gifs.listValue.values)}</div>
     } else if (isLinkCard(message)) {
-      return (
-        <div>
-          {renderLink(message.message.payload.fields.links.listValue.values)}
-        </div>
-      );
+      return <div>{renderLink(message.message.payload.fields.links.listValue.values)}</div>
     }
-  };
+  }
 
   // Renders all the messages
-  const renderMessages = stateMessages => {
+  const renderMessages = (stateMessages) => {
     if (stateMessages) {
       return stateMessages.map((message, i) => {
-        return renderMessage(message, i);
-      });
+        return renderMessage(message, i)
+      })
     }
-    return null;
-  };
+    return null
+  }
 
   const toggleBot = () => {
-    setShowBot(!showBot);
-  };
+    setShowBot(!showBot)
+  }
 
-  const handleChange = e => {
-    setValue(e.target.value);
-  };
+  const handleChange = (e) => {
+    setValue(e.target.value)
+  }
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    if (value !== "") {
-      const message = value.split();
-      await df_text_query(message);
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+    if (value !== '') {
+      const message = value.split()
+      await df_text_query(message)
     }
-    setValue("");
-  };
 
-  const handleButtonSend = async event => {
-    const eventText = event.target.innerText;
-    const message = eventText.split();
-
-    if (message !== "") {
-      await df_text_query(message).then(() => {
-        setValue("");
-      });
+    if (!isLoading) {
+      setValue('')
     }
-  };
+  }
+
+  const handleButtonSend = async (event) => {
+    const eventText = event.target.innerText
+    const message = eventText.split()
+
+    if (message !== '') {
+      await df_text_query(message)
+    }
+  }
 
   // Check for if iOS for mobile switch fix
   // const checkIos = () => {
@@ -241,8 +210,8 @@ const Chatbot = () => {
           <ChatMain className="scrollbar" id="style-4">
             {renderMessages(messages)}
             <div
-              ref={el => {
-                messagesEnd = el;
+              ref={(el) => {
+                messagesEnd = el
               }}
             />
           </ChatMain>
@@ -250,27 +219,23 @@ const Chatbot = () => {
             <ChatInput
               type="text"
               //Scrolls window to input
-              ref={composeRefs(inputRef, input => {
-                chatInput = input;
+              ref={composeRefs(inputRef, (input) => {
+                chatInput = input
               })}
               placeholder="Type a message..."
               value={value}
               onChange={handleChange}
               onMouseEnter={() => {
-                inputRef.current.focus();
+                inputRef.current.focus()
               }}
             />
-            <ChatSubmit
-              type="submit"
-              value="Submit"
-              disabled={value.length < 1}
-            >
+            <ChatSubmit type="submit" value="Submit" disabled={value.length < 1}>
               SEND
             </ChatSubmit>
           </ChatFooter>
         </ChatContainer>
       </>
-    );
+    )
   } else {
     return (
       <>
@@ -285,8 +250,8 @@ const Chatbot = () => {
           </div>
         </div>
       </>
-    );
+    )
   }
-};
+}
 
-export default Chatbot;
+export default Chatbot

@@ -1,38 +1,29 @@
-import React from "react";
-import { useSpring } from "react-spring";
-
-import {
-  StyledPage,
-  StyledPageSplit,
-  StyledInfoPanel,
-  StyledOpposite,
-  StyledLogo,
-  StyledButton
-} from "./styles";
-import { Link } from "react-router-dom";
-import SVG from "../components/SVG/SVG";
+import React from 'react'
+import { useSpring } from 'react-spring'
+import { StyledPage, StyledPageSplit, StyledInfoPanel, StyledOpposite, StyledLogo, StyledButton } from './styles'
+import { Link } from 'react-router-dom'
+import SVG from '../components/SVG/SVG'
 
 function Skills() {
   const fade = useSpring({
     from: {
-      opacity: 0
+      opacity: 0,
     },
     to: {
-      opacity: 1
-    }
-  });
+      opacity: 1,
+    },
+  })
 
   return (
     <StyledPage style={fade}>
       <StyledInfoPanel className="skillsText about_margin" style={fade}>
         <h1>
-          Using <br />
-          Modern Tools <br />
-          and Best Practices.
+          Web <br />
+          Development
         </h1>
         <h2>
-          This app is built with <br />
-          React, Node + Dialogflow
+          I could list my skills here, <br />
+          but I would rather show you.
         </h2>
 
         <Link to="/contact/">
@@ -44,10 +35,10 @@ function Skills() {
           <SVG />
         </StyledLogo>
       </div>
-      <StyledPageSplit />
+      <StyledPageSplit></StyledPageSplit>
       <StyledOpposite className="mobile__change"></StyledOpposite>
     </StyledPage>
-  );
+  )
 }
 
-export default Skills;
+export default Skills
