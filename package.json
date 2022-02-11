@@ -26,7 +26,7 @@
     "dialogflow-fulfillment": "^0.6.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
+    "express-handlebars": "^5.3.1",
     "googleapis": "^39.2.0",
     "heroku-ssl-redirect": "0.0.4",
     "node": "^12.14.0",
